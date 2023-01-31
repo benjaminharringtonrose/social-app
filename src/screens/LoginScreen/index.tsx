@@ -13,8 +13,8 @@ const LoginScreen: FC = () => {
   const [password, setPassword] = useState('');
 
   return (
-    <RootView>
-      <View style={styles.topHalfContainer} />
+    <RootView backgroundText={"SOSH"}>
+      <View style={styles.topHalfContainer}/>
         <KeyboardAvoidingView
           behavior={isIOS() ? 'padding' : 'height'}
           style={styles.bottomHalfContainer}
@@ -31,13 +31,13 @@ const LoginScreen: FC = () => {
           />
           <Button label={"Login"} onPress={() => {}} />
           <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.forgotPasswordText}>{"Forgot Password?"}</Text>
+            <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
         <View style={styles.signupContainer}>
           <Text style={{ fontSize: 16 }}>{"Don't have an account? "}</Text>
           <TouchableOpacity onPress={() => {}}>
-            <Text style={{ textAlign: 'center', fontSize: 16 }}>{"Sign up"}</Text>
+            <Text style={styles.ctaText}>{"Sign up"}</Text>
           </TouchableOpacity>
         </View>
 
