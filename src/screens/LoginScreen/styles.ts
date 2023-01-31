@@ -1,14 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  root: {
+  rootContainer: {
     flex: 1,
   },
-  topHalf: {
+  topHalfContainer: {
     flex: 1,
   },
-  bottomHalf: {
+  bottomHalfContainer: {
     flex: 1,
+  },
+  forgotPasswordText: {
+    textAlign: 'center',
+    fontSize: 16
+  },
+  signupContainer: {
+    flexDirection: 'row', 
+    justifyContent: 'center',
   }
 });
 
