@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
+  input: {
+    minHeight: 50,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 6
   },
-  topHalf: {
-    flex: 1,
-  },
-  bottomHalf: {
-    flex: 1,
-  }
 });
 
 export default styles;

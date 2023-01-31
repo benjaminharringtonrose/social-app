@@ -4,12 +4,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  topHalf: {
-    flex: 1,
-  },
-  bottomHalf: {
-    flex: 1,
-  }
 });
 
 export default styles;

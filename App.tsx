@@ -1,5 +1,5 @@
 import React from 'react';
-import './src/config/firebaseConfig';
+import './src/api/firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './src/navigation/RootNavigator';
 
