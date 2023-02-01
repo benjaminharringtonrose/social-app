@@ -3,17 +3,17 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
 import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StatusBar } from 'expo-status-bar';
 
-import { Button, Input, AuthRootView } from '../../components';
+import { AuthRootView, Input, Button } from '../../components';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
+import { StatusBar } from 'expo-status-bar';
 
-type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
+type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'SignupScreen'>;
 
-const LoginScreen: FC = () => {
+const SignupScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,7 +27,7 @@ const LoginScreen: FC = () => {
           behavior={isIOS() ? 'padding' : 'height'}
           style={styles.bottomHalfContainer}
         >
-          <Input 
+          <Input
             onChangeText={setEmail} 
             value={email}
             textInputProps={{ placeholder: 'Email' }}
@@ -55,15 +55,12 @@ const LoginScreen: FC = () => {
               );
             }}
           />
-          <Button label={"LOGIN"} onPress={() => {}} />
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
-          </TouchableOpacity>
+          <Button label={"Sign Up"} onPress={() => {}} />
         </KeyboardAvoidingView>
         <View style={styles.signupContainer}>
-          <Text style={{ fontSize: 16 }}>{"Don't have an account? "}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')} style={{ paddingVertical: 20 }}>
-            <Text style={styles.ctaText}>{"Sign up"}</Text>
+          <Text style={{ fontSize: 16 }}>{"Already have an account? "}</Text>
+          <TouchableOpacity onPress={() => navigation.popToTop()} style={{ paddingVertical: 20 }}>
+            <Text style={styles.ctaText}>{"Sign in"}</Text>
           </TouchableOpacity>
         </View>
 
@@ -71,4 +68,4 @@ const LoginScreen: FC = () => {
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;
