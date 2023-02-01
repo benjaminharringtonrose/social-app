@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   backgroundTextContainer: {
     position: 'absolute', 
     alignItems: 'center',
-    top: height / 6, 
+    top: 60, 
     bottom: 0, 
     left: 0, 
     right: 0

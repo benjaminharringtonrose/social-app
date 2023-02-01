@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
-import { View, Text, TextInput, TextInputProps, NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { View, Text, TextInput, TextInputProps } from 'react-native';
 
 import styles from './styles';
 
@@ -26,7 +25,7 @@ const Input: FC<IProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   return (
     <View style={[styles.input, isFocused && {borderColor: focusedColor }]}>
-      <Text style={{fontSize: 12, fontWeight: "500", marginLeft: 34}}>{placeholder}</Text>
+      <Text style={styles.placeholderText}>{placeholder}</Text>
       <View style={styles.row}>
         {!!leadingIcon && (
           <View style={{marginRight: 10}}>

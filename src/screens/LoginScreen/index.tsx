@@ -27,7 +27,8 @@ const LoginScreen: FC = () => {
           behavior={isIOS() ? 'padding' : 'height'}
           style={styles.bottomHalfContainer}
         >
-          <Text style={styles.subtitleText}>{"Sign In"}</Text>
+          <Text style={styles.subtitleText}>{"Login"}</Text>
+          <Text style={styles.descriptionText}>{"Welcome back to the SOSH experience."}</Text>
           <Input 
             onChangeText={setEmail} 
             value={email}

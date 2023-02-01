@@ -2,12 +2,15 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 1,
+    flex: 3,
   },
   topHalfContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  bottomHalfContainer: {
+    flex: 2,
   },
   titleText: {
     fontSize: 72,
@@ -18,8 +21,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginLeft: 12,
   },
-  bottomHalfContainer: {
-    flex: 1,
+  descriptionText: {
+    fontSize: 17,
+    fontWeight: '600',
+    marginLeft: 12,
   },
   ctaText: {
     textAlign: 'center',

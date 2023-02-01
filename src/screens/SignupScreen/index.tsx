@@ -28,6 +28,7 @@ const SignupScreen: FC = () => {
           style={styles.bottomHalfContainer}
         >
           <Text style={styles.subtitleText}>{"Sign Up"}</Text>
+          <Text style={styles.descriptionText}>{"Choose how you'd like to sign up."}</Text>
           <Input
             onChangeText={setEmail} 
             value={email}
