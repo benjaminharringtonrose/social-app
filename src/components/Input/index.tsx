@@ -10,15 +10,23 @@ interface IProps {
   onChangeText: (text: string) => void;
   value: string;
   textInputProps?: TextInputProps;
+  placeholder?: string;
   leadingIcon?: (isFocused: boolean) => JSX.Element;
   trailingIcon?: (isFocused: boolean) => JSX.Element;
 }
 
-const Input: FC<IProps> = ({ onChangeText, value, leadingIcon, trailingIcon, textInputProps }) => {
+const Input: FC<IProps> = ({ 
+  onChangeText, 
+  value, 
+  leadingIcon, 
+  trailingIcon, 
+  textInputProps,
+  placeholder
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <View style={[styles.input, isFocused && {borderColor: focusedColor }]}>
-      <Text style={{fontSize: 12, fontWeight: "500", marginLeft: 34}}>{"EMAIL"}</Text>
+      <Text style={{fontSize: 12, fontWeight: "500", marginLeft: 34}}>{placeholder}</Text>
       <View style={styles.row}>
         {!!leadingIcon && (
           <View style={{marginRight: 10}}>

@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     fontSize: 72,
     fontWeight: '600'
   },
+  subtitleText: {
+    fontSize: 36,
+    fontWeight: '600',
+    marginLeft: 12,
+  },
   bottomHalfContainer: {
     flex: 1,
   },

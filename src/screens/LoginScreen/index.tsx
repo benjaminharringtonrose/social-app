@@ -27,10 +27,12 @@ const LoginScreen: FC = () => {
           behavior={isIOS() ? 'padding' : 'height'}
           style={styles.bottomHalfContainer}
         >
+          <Text style={styles.subtitleText}>{"Sign In"}</Text>
           <Input 
             onChangeText={setEmail} 
             value={email}
-            textInputProps={{ placeholder: 'Email' }}
+            textInputProps={{ returnKeyType: 'next' }}
+            placeholder={"EMAIL"}
             leadingIcon={(isFocused) => {
               return (
                 <Ionicons 
@@ -44,7 +46,7 @@ const LoginScreen: FC = () => {
           <Input
             onChangeText={setPassword}
             value={password}
-            textInputProps={{ placeholder: 'Password' }}
+            placeholder={"PASSWORD"}
             leadingIcon={(isFocused) => {
               return (
                 <Ionicons 

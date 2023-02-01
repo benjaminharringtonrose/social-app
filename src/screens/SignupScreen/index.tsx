@@ -27,16 +27,18 @@ const SignupScreen: FC = () => {
           behavior={isIOS() ? 'padding' : 'height'}
           style={styles.bottomHalfContainer}
         >
+          <Text style={styles.subtitleText}>{"Sign Up"}</Text>
           <Input
             onChangeText={setEmail} 
             value={email}
-            textInputProps={{ placeholder: 'Email' }}
+            textInputProps={{ returnKeyType: 'next' }}
+            placeholder={"EMAIL"}
             leadingIcon={(isFocused) => {
               return (
                 <Ionicons 
                   name="mail-outline" 
                   size={24} 
-                  color={isFocused ? "green" : "black"} 
+                  color={isFocused ? "green" : "black"}
                 />
               );
             }}
@@ -44,7 +46,8 @@ const SignupScreen: FC = () => {
           <Input
             onChangeText={setPassword}
             value={password}
-            textInputProps={{ placeholder: 'Password' }}
+            textInputProps={{ returnKeyType: 'go' }}
+            placeholder={"PASSWORD"}
             leadingIcon={(isFocused) => {
               return (
                 <Ionicons 
