@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Color } from '../../constants';
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -15,29 +17,30 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 72,
     fontWeight: '600',
-    color: "white"
+    color: Color.white
   },
   subtitleText: {
     marginLeft: 12,
     fontSize: 36,
     fontWeight: '600',
-    color: "#5a3d2b"
+    color: Colors.white
   },
   descriptionText: {
     fontSize: 17,
-    fontWeight: '600',
     marginLeft: 12,
-    color: "#e5771e"
+    color: Color.lightGrey,
+    fontFamily: "Montserrat-Regular"
   },
   ctaText: {
     textAlign: 'center',
     fontSize: 16,
-    fontWeight: '700',
-    color: "#f4a127"
+    color: Color.teal,
+    fontFamily: "Montserrat-Regular"
   },
   accountQText: { 
     fontSize: 16, 
-    color: "#5a3d2b" 
+    color: Color.white,
+    fontFamily: "Montserrat-Regular"
   },
   signupContainer: {
     flexDirection: 'row', 

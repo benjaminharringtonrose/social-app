@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Color } from '../../constants';
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -15,24 +16,24 @@ const styles = StyleSheet.create({
   subtitleText: {
     fontSize: 36,
     marginLeft: 12,
-    color: "white",
+    color: Color.white,
     fontFamily: "Montserrat-Medium"
   },
   descriptionText: {
     fontSize: 17,
     marginLeft: 12,
-    color: "white",
+    color: Color.lightGrey,
     fontFamily: "Montserrat-Regular"
   },
   ctaText: {
     textAlign: 'center',
     fontSize: 16,
-    color: "#35b5ad",
-    fontFamily: "Montserrat-Bold"
+    color: Color.teal,
+    fontFamily: "Montserrat-Regular"
   },
   accountQText: { 
     fontSize: 16, 
-    color: "white",
+    color: Color.white,
     fontFamily: "Montserrat-Regular"
   },
   signupContainer: {

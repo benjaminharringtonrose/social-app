@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 72,
     color: "white",
-    fontFamily: 'Montserrat-Light'
+    fontFamily: 'Montserrat-Medium'
   },
   backgroundTextContainer: {
     position: 'absolute', 

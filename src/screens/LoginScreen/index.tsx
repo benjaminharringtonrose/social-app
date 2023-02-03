@@ -21,14 +21,14 @@ const LoginScreen: FC = () => {
 
   return (
     <AuthRootView backgroundTitle={"Social"}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <View style={styles.topHalfContainer}/>
         <KeyboardAvoidingView
           behavior={isIOS() ? 'padding' : 'height'}
           style={styles.bottomHalfContainer}
         >
           <Text style={styles.subtitleText}>{"Login"}</Text>
-          <Text style={styles.descriptionText}>{"Welcome back to the SOSH experience."}</Text>
+          <Text style={styles.descriptionText}>{"Welcome back to the Social experience."}</Text>
           <Input 
             onChangeText={setEmail} 
             value={email}
@@ -66,7 +66,7 @@ const LoginScreen: FC = () => {
         <View style={styles.signupContainer}>
           <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')} style={{ paddingVertical: 20 }}>
-            <Text style={styles.ctaText}>{"Sign up"}</Text>
+            <Text style={[styles.ctaText, {fontFamily: "Montserrat-Bold"}]}>{"Sign up"}</Text>
           </TouchableOpacity>
         </View>
 

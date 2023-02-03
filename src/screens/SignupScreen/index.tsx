@@ -21,7 +21,7 @@ const SignupScreen: FC = () => {
 
   return (
     <AuthRootView backgroundTitle={"Social"}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <View style={styles.topHalfContainer}/>
         <KeyboardAvoidingView
           behavior={isIOS() ? 'padding' : 'height'}
