@@ -10,6 +10,9 @@ import { isIOS } from '../../utils';
 
 import styles from './styles';
 import { StatusBar } from 'expo-status-bar';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../api';
+import { useAuth } from '../../store';
 
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'SignupScreen'>;
 
@@ -17,7 +20,20 @@ const SignupScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { setUser } = useAuth();
+
   const navigation = useNavigation<TNavigationProp>();
+
+  const onEmailPasswordSignup = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      setUser(user);
+    })
+    .catch((error) => {
+      console.log(error.message)
+    });
+  };
 
   return (
     <AuthRootView backgroundTitle={"Social"}>
@@ -59,7 +75,7 @@ const SignupScreen: FC = () => {
               );
             }}
           />
-          <Button label={"Sign Up"} onPress={() => {}} />
+          <Button label={"Sign Up"} onPress={onEmailPasswordSignup} />
         </KeyboardAvoidingView>
         <View style={styles.signupContainer}>
           <Text style={styles.accountQText}>{"Already have an account? "}</Text>

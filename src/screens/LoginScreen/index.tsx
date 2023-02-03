@@ -5,13 +5,16 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { StatusBar } from 'expo-status-bar';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 import { Button, Input, AuthRootView } from '../../components';
+import { Color } from '../../constants';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { useAuth } from '../../store';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
-import { Color } from '../../constants';
+import { auth } from '../../api';
 
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
 
@@ -19,7 +22,20 @@ const LoginScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { setUser } = useAuth();
+
   const navigation = useNavigation<TNavigationProp>();
+
+  const onEmailPasswordLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      setUser(user);
+    })
+    .catch((error) => {
+      console.log(error.message)
+    });
+  };
 
   return (
     <AuthRootView backgroundTitle={"Social"}>
@@ -60,7 +76,7 @@ const LoginScreen: FC = () => {
               );
             }}
           />
-          <Button label={"LOGIN"} onPress={() => {}} />
+          <Button label={"LOGIN"} onPress={onEmailPasswordLogin} />
           <TouchableOpacity onPress={() => {}}>
             <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
           </TouchableOpacity>

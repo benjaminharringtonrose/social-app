@@ -20,11 +20,11 @@ type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator: FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { auth } = useAuth();
   
   return (
     <Stack.Navigator screenOptions={navigatorScreenOptions}>
-      {isAuthenticated ? (
+      {!!auth.user ? (
         <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       ) : (
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />

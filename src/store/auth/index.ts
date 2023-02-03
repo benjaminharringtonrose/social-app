@@ -1,26 +1,27 @@
+import { User } from "firebase/auth";
 import { atom, useRecoilState } from "recoil";
 
 interface IAuthState {
-  isAuthenticated: boolean;
+  user?: User;
 }
 
 const authState = atom<IAuthState>({
   key: 'authState',
   default: {
-    isAuthenticated: false
+    user: undefined,
   },
 });
 
 export const useAuth = () => {
   const [auth, setAuthState] = useRecoilState(authState);
 
-  const setIsAuthenticated = (isAuthenticated: boolean) => {
-    setAuthState((prevState) => ({ ...prevState, isAuthenticated }));
+  const setUser = (user: User) => {
+    setAuthState((prevState) => ({ ...prevState, user }));
   };
 
   return {
     auth,
-    setIsAuthenticated,
+    setUser
   }
 };
 
