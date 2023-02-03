@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     color: Color.teal,
-    fontFamily: "Montserrat-Regular"
+    fontFamily: "Montserrat-Bold"
   },
   accountQText: {
     fontSize: 16,
