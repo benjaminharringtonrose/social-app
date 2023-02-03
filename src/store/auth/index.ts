@@ -1,11 +1,26 @@
-import {create} from 'zustand';
+import { atom, useRecoilState } from "recoil";
 
-export interface IAuthState {
+interface IAuthState {
   isAuthenticated: boolean;
 }
 
-export const useAuth = create<IAuthState>((set) => ({
-  isAuthenticated: false,
-  setIsAuthenticated: (isAuthenticated: boolean) => set({ isAuthenticated }),
-}));
+const authState = atom<IAuthState>({
+  key: 'authState',
+  default: {
+    isAuthenticated: false
+  },
+});
+
+export const useAuth = () => {
+  const [auth, setAuthState] = useRecoilState(authState);
+
+  const setIsAuthenticated = (isAuthenticated: boolean) => {
+    setAuthState((prevState) => ({ ...prevState, isAuthenticated }));
+  };
+
+  return {
+    auth,
+    setIsAuthenticated,
+  }
+};
 

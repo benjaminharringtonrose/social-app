@@ -3,6 +3,7 @@ import './src/api/firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { RecoilRoot } from 'recoil';
 
 import { RootNavigator } from './src/navigation/RootNavigator';
 
@@ -31,8 +32,11 @@ export default function App() {
   }
 
   return (
+    <RecoilRoot>
       <NavigationContainer>
         <RootNavigator />
       </NavigationContainer>
+    </RecoilRoot>
+
   );
 }

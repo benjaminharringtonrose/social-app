@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     color: Color.teal,
     fontFamily: "Montserrat-Regular"
   },
-  accountQText: { 
-    fontSize: 16, 
+  accountQText: {
+    fontSize: 16,
     color: Color.white,
     fontFamily: "Montserrat-Regular"
   },
