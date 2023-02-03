@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
 import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { StatusBar } from 'expo-status-bar';
 
 import { Button, Input, AuthRootView } from '../../components';
@@ -10,6 +11,7 @@ import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
+import { Color } from '../../constants';
 
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
 
@@ -62,6 +64,17 @@ const LoginScreen: FC = () => {
           <TouchableOpacity onPress={() => {}}>
             <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
           </TouchableOpacity>
+          <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 25 }}>
+            <TouchableOpacity>
+              <FontAwesome name={'facebook-square'} size={50} color={Color.teal}  />
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginHorizontal: 30 }}>
+              <FontAwesome name={'apple'} size={50} color={Color.teal}  />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <FontAwesome name={'google'} size={50} color={Color.teal}  />
+            </TouchableOpacity>
+          </View>
         </KeyboardAvoidingView>
         <View style={styles.signupContainer}>
           <Text style={styles.accountQText}>{"Don't have an account? "}</Text>

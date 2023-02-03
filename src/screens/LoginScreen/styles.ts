@@ -41,7 +41,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     minHeight: 40
-  }
+  },
+  socialLoginButton: {
+    width: 60, 
+    height: 60, 
+    backgroundColor: Color.lightGrey, 
+    borderRadius: 10
+  },
 });
 
 export default styles;

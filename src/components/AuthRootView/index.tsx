@@ -22,14 +22,13 @@ const AuthRootView: FC<IProps> = ({ backgroundTitle, children }) => (
         <View style={styles.backgroundTextContainer}>
         <Text style={styles.titleText}>{backgroundTitle}</Text>
         <LottieView
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-         
-        }}
-        source={require('../../../assets/network.json')}
-      />
+          autoPlay
+          style={{
+            width: 250,
+            height: 250,
+          }}
+          source={require('../../../assets/network.json')}
+        />
         </View>
         {children}
       </View>
