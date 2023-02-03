@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
-import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, WithSpringConfig, withTiming, Easing } from 'react-native-reanimated';
+import { Color } from '../../constants';
 
 import styles from './styles';
 
@@ -21,7 +22,7 @@ const Input: FC<IProps> = ({
   textInputProps,
   placeholder
 }) => {
-  const placeholderOffset = useSharedValue(-6);
+  const placeholderOffset = useSharedValue(0);
   const [isFocused, setIsFocused] = useState(false);
 
   const animStyle = useAnimatedStyle(() => {
@@ -35,7 +36,7 @@ const Input: FC<IProps> = ({
       <Reanimated.Text style={[styles.placeholderText, animStyle]}>{placeholder}</Reanimated.Text>
       <View style={styles.row}>
         {!!leadingIcon && (
-          <View style={{marginRight: 10}}>
+          <View style={{  paddingLeft: 8, justifyContent: 'center' }}>
             {leadingIcon(isFocused)}
           </View>
           )}
@@ -43,12 +44,12 @@ const Input: FC<IProps> = ({
           onChangeText={onChangeText}
           onFocus={() => {
             setIsFocused(true);
-            placeholderOffset.value = withTiming(-22);
+            placeholderOffset.value = withTiming(-18, { easing: Easing.ease, duration: 150 });
           }}
           onBlur={() => {
             setIsFocused(false);
             if(!value) {
-              placeholderOffset.value = withTiming(-6);
+              placeholderOffset.value = withTiming(0);
             }
 
           }}
@@ -56,7 +57,12 @@ const Input: FC<IProps> = ({
           selectionColor={"white"}
           autoCapitalize={"none"}
           {...textInputProps}
-          style={{flex: 1, color: "white"}}
+          style={{ 
+            flex: 1, 
+            color: Color.lightGrey, 
+            fontFamily: "Montserrat-Regular",
+            marginLeft: 16
+          }}
         />
         {!!trailingIcon && trailingIcon(isFocused)}
       </View>

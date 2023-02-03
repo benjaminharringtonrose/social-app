@@ -50,7 +50,7 @@ const LoginScreen: FC = () => {
           <Input 
             onChangeText={setEmail} 
             value={email}
-            textInputProps={{ returnKeyType: 'next' }}
+            textInputProps={{ returnKeyType: 'next', clearButtonMode: 'always' }}
             placeholder={"EMAIL"}
             leadingIcon={(isFocused) => {
               return (
@@ -75,6 +75,7 @@ const LoginScreen: FC = () => {
                 />
               );
             }}
+            textInputProps={{ secureTextEntry: true }}
           />
           <Button label={"LOGIN"} onPress={onEmailPasswordLogin} />
           <TouchableOpacity onPress={() => {}}>
