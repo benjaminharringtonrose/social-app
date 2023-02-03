@@ -3,15 +3,15 @@ import { Color } from '../../constants';
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 7,
+    flex: 2,
   },
   topHalfContainer: {
-    flex: 3,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomHalfContainer: {
-    flex: 4,
+    flex: 1,
   },
   subtitleText: {
     fontSize: 36,

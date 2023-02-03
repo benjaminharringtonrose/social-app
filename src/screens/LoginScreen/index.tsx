@@ -81,15 +81,15 @@ const LoginScreen: FC = () => {
           <TouchableOpacity onPress={() => {}}>
             <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
           </TouchableOpacity>
-          <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 25 }}>
+          <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 15 }}>
             <TouchableOpacity>
-              <FontAwesome name={'facebook-square'} size={50} color={Color.teal}  />
+              <FontAwesome name={'facebook-square'} size={40} color={Color.teal}  />
             </TouchableOpacity>
             <TouchableOpacity style={{ marginHorizontal: 30 }}>
-              <FontAwesome name={'apple'} size={50} color={Color.teal}  />
+              <FontAwesome name={'apple'} size={40} color={Color.teal}  />
             </TouchableOpacity>
             <TouchableOpacity>
-              <FontAwesome name={'google'} size={50} color={Color.teal}  />
+              <FontAwesome name={'google'} size={40} color={Color.teal}  />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

@@ -3,7 +3,7 @@ import { Color } from '../../constants';
 
 const styles = StyleSheet.create({
   root: {
-    minHeight: 60,
+    minHeight: 50,
     margin: 12,
     padding: 10,
     borderRadius: 30,

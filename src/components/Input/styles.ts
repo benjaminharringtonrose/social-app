@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
-    minHeight: 70,
+    minHeight: 50,
     margin: 12,
     borderWidth: 1,
     paddingHorizontal: 10,
