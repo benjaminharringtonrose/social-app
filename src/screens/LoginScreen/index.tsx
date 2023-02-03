@@ -20,7 +20,7 @@ const LoginScreen: FC = () => {
   const navigation = useNavigation<TNavigationProp>();
 
   return (
-    <AuthRootView backgroundTitle={"SOSH"}>
+    <AuthRootView backgroundTitle={"Social"}>
       <StatusBar style="dark" />
       <View style={styles.topHalfContainer}/>
         <KeyboardAvoidingView
@@ -39,7 +39,7 @@ const LoginScreen: FC = () => {
                 <Ionicons 
                   name="mail-outline" 
                   size={24} 
-                  color={isFocused ? "green" : "black"} 
+                  color={'#A9A9A9'} 
                 />
               );
             }}
@@ -53,7 +53,7 @@ const LoginScreen: FC = () => {
                 <Ionicons 
                   name="lock-closed-outline" 
                   size={24}
-                  color={isFocused ? "green" : "black"} 
+                  color={'#A9A9A9'} 
                 />
               );
             }}
@@ -64,7 +64,7 @@ const LoginScreen: FC = () => {
           </TouchableOpacity>
         </KeyboardAvoidingView>
         <View style={styles.signupContainer}>
-          <Text style={{ fontSize: 16 }}>{"Don't have an account? "}</Text>
+          <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')} style={{ paddingVertical: 20 }}>
             <Text style={styles.ctaText}>{"Sign up"}</Text>
           </TouchableOpacity>

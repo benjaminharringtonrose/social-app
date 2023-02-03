@@ -21,7 +21,7 @@ export const AuthNavigator: FC = () => (
     <Stack.Screen 
       name="SignupScreen" 
       component={SignupScreen} 
-      options={{ presentation: 'containedModal', gestureEnabled: false }}
+      options={{ presentation: 'modal', gestureEnabled: false, }}
     />
   </Stack.Navigator>
 );

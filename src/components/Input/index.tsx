@@ -1,9 +1,8 @@
 import React, { FC, useState } from 'react';
-import { View, Text, TextInput, TextInputProps } from 'react-native';
+import { View, TextInput, TextInputProps } from 'react-native';
+import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 import styles from './styles';
-
-const focusedColor = "green"
 
 interface IProps {
   onChangeText: (text: string) => void;
@@ -22,10 +21,18 @@ const Input: FC<IProps> = ({
   textInputProps,
   placeholder
 }) => {
+  const placeholderOffset = useSharedValue(-6);
   const [isFocused, setIsFocused] = useState(false);
+
+  const animStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: placeholderOffset.value }],
+    };
+  }, [isFocused]);
+
   return (
-    <View style={[styles.input, isFocused && {borderColor: focusedColor }]}>
-      <Text style={styles.placeholderText}>{placeholder}</Text>
+    <View style={[styles.input, isFocused && { borderColor: '#A9A9A9' }]}>
+      <Reanimated.Text style={[styles.placeholderText, animStyle]}>{placeholder}</Reanimated.Text>
       <View style={styles.row}>
         {!!leadingIcon && (
           <View style={{marginRight: 10}}>
@@ -34,11 +41,22 @@ const Input: FC<IProps> = ({
           )}
         <TextInput
           onChangeText={onChangeText}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => {
+            setIsFocused(true);
+            placeholderOffset.value = withTiming(-22);
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+            if(!value) {
+              placeholderOffset.value = withTiming(-6);
+            }
+
+          }}
           value={value}
+          selectionColor={"white"}
+          autoCapitalize={"none"}
           {...textInputProps}
-          style={{flex: 1}}
+          style={{flex: 1, color: "white"}}
         />
         {!!trailingIcon && trailingIcon(isFocused)}
       </View>

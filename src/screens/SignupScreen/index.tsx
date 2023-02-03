@@ -20,7 +20,7 @@ const SignupScreen: FC = () => {
   const navigation = useNavigation<TNavigationProp>();
 
   return (
-    <AuthRootView backgroundTitle={"SOSH"}>
+    <AuthRootView backgroundTitle={"Social"}>
       <StatusBar style="dark" />
       <View style={styles.topHalfContainer}/>
         <KeyboardAvoidingView
@@ -39,7 +39,7 @@ const SignupScreen: FC = () => {
                 <Ionicons 
                   name="mail-outline" 
                   size={24} 
-                  color={isFocused ? "green" : "black"}
+                  color={'#A9A9A9'}
                 />
               );
             }}
@@ -54,7 +54,7 @@ const SignupScreen: FC = () => {
                 <Ionicons 
                   name="lock-closed-outline" 
                   size={24}
-                  color={isFocused ? "green" : "black"} 
+                  color={'#A9A9A9'} 
                 />
               );
             }}
@@ -62,7 +62,7 @@ const SignupScreen: FC = () => {
           <Button label={"Sign Up"} onPress={() => {}} />
         </KeyboardAvoidingView>
         <View style={styles.signupContainer}>
-          <Text style={{ fontSize: 16 }}>{"Already have an account? "}</Text>
+          <Text style={styles.accountQText}>{"Already have an account? "}</Text>
           <TouchableOpacity onPress={() => navigation.popToTop()} style={{ paddingVertical: 20 }}>
             <Text style={styles.ctaText}>{"Sign in"}</Text>
           </TouchableOpacity>

@@ -4,15 +4,16 @@ const styles = StyleSheet.create({
   root: {
     minHeight: 60,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
     borderRadius: 20,
+    backgroundColor: "#35b5ad",
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   label: {
     fontSize: 16,
-    fontWeight: '700'
+    fontWeight: '700',
+    color: "white"
   }
 });
 

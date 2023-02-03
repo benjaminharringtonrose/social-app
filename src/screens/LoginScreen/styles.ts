@@ -2,34 +2,38 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 3,
+    flex: 7,
   },
   topHalfContainer: {
-    flex: 1,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomHalfContainer: {
-    flex: 2,
-  },
-  titleText: {
-    fontSize: 72,
-    fontWeight: '600'
+    flex: 4,
   },
   subtitleText: {
     fontSize: 36,
-    fontWeight: '600',
     marginLeft: 12,
+    color: "white",
+    fontFamily: "Montserrat-Medium"
   },
   descriptionText: {
     fontSize: 17,
-    fontWeight: '600',
     marginLeft: 12,
+    color: "white",
+    fontFamily: "Montserrat-Regular"
   },
   ctaText: {
     textAlign: 'center',
     fontSize: 16,
-    fontWeight: '700'
+    color: "#35b5ad",
+    fontFamily: "Montserrat-Bold"
+  },
+  accountQText: { 
+    fontSize: 16, 
+    color: "white",
+    fontFamily: "Montserrat-Regular"
   },
   signupContainer: {
     flexDirection: 'row', 

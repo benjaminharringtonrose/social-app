@@ -6,6 +6,7 @@ import {
   Text, 
   SafeAreaView 
 } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 import styles from './styles';
 
@@ -19,7 +20,16 @@ const AuthRootView: FC<IProps> = ({ backgroundTitle, children }) => (
     <TouchableWithoutFeedback style={styles.root} onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.root}>
         <View style={styles.backgroundTextContainer}>
-          <Text style={styles.titleText}>{backgroundTitle}</Text>
+        <Text style={styles.titleText}>{backgroundTitle}</Text>
+        <LottieView
+        autoPlay
+        style={{
+          width: 200,
+          height: 200,
+         
+        }}
+        source={require('../../../assets/network.json')}
+      />
         </View>
         {children}
       </View>
