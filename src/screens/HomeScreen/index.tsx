@@ -1,15 +1,38 @@
 import React, { FC } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList, ListRenderItemInfo, View } from 'react-native';
+
 import { ContentCard, RootView } from '../../components';
+import { Size, Mock } from '../../constants';
 
 const HomeScreen: FC = () => {
+
+  const renderItem = ({ item }: ListRenderItemInfo<IContent>) => {
+    return (
+      <ContentCard 
+        id={item.id} 
+        avatarUrl={item.avatarUrl} 
+        name={item.name} 
+        timestamp={item.timestamp} 
+        caption={item.caption}
+        content={item.content}
+        likes={item.likes}
+        comments={item.comments}
+      />
+    )
+  };
+
   return (
     <RootView>
-      <ScrollView contentContainerStyle={{ marginTop: 100 }}>
-        <ContentCard />
-      </ScrollView>
+      <FlatList 
+        contentContainerStyle={{ paddingVertical: 50 }}
+        data={Mock.feedData}
+        renderItem={renderItem}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+      />
     </RootView>
   );
 };
 
 export default HomeScreen;
+
+const ItemSeparatorComponent = () => <View style={{ height: Size.gutter }} />

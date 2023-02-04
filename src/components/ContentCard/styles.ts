@@ -4,7 +4,7 @@ import { Color, Font, Size } from '../../constants';
 const styles = StyleSheet.create({
   rootContainer: { 
     backgroundColor: Color.black, 
-    marginHorizontal: Size.gutter, 
+    marginHorizontal: Size.gutter,
     borderRadius: 10,
     borderColor: Color.tertiaryBackground,
     borderWidth: 1,
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     bottomRowContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingTop: Size.gutter
+      paddingHorizontal: Size.gutter,
+      paddingBottom: Size.gutter,
     }
 });
 

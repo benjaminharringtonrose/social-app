@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { FC } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import styles from './styles';
 
 interface IProps {
@@ -9,10 +9,10 @@ interface IProps {
 
 const RootView: FC<IProps> = ({ children }) => {
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       <StatusBar style={'light'} />
       {children}
-    </View>
+    </SafeAreaView>
   );
 };
 
