@@ -1,16 +1,17 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 
 import { Color } from '../../constants';
+
 import styles from './styles';
 
 const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const { bottom } = useSafeAreaInsets();
   return (
-    <BlurView tint="dark" intensity={80} style={styles.blurView}>
+    <BlurView tint="default" intensity={50} style={styles.blurView}>
       <View style={styles.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -60,16 +61,13 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={{ 
-                flex: 1, 
-                justifyContent: 'center', 
-                alignItems: 'center', 
-                backgroundColor: 'transparent', 
-                paddingBottom: bottom, 
-                paddingTop: 10  
-              }}
+              style={[styles.iconContainer, { paddingBottom: bottom }]}
             >
-              <Ionicons name={getIconName(route.name)} size={30} color={isFocused ? '#673ab7' : Color.white} />
+              <Ionicons 
+                name={getIconName(route.name)}
+                size={30}
+                color={isFocused ? Color.purple : Color.white}
+              />
             </TouchableOpacity>
           );
         })}
