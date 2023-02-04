@@ -1,14 +1,15 @@
+import React, { useEffect, useState } from 'react';
+
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { View, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
-import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, WithSpringConfig } from 'react-native-reanimated';
+import Reanimated, { useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig, Easing } from 'react-native-reanimated';
 
 import { Color, Size } from '../../constants';
 
 import styles from './styles';
-import { useEffect, useState } from 'react';
 
 const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const { bottom } = useSafeAreaInsets();
@@ -18,13 +19,13 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
   const tabCount = state.routes?.length;
   const tabWidth = Size.width / tabCount;
 
-  const springConfig: WithSpringConfig = {
-    damping: 20,
-    velocity: 100
+  const timingConfig: WithTimingConfig = {
+    duration: 250,
+    easing: Easing.linear
   }
 
   useEffect(() => {
-    indicatorOffset.value = withSpring((state.index) * tabWidth, springConfig);
+    indicatorOffset.value = withTiming((state.index) * tabWidth, timingConfig);
   }, [animate]);
 
   const animStyle = useAnimatedStyle(() => {
@@ -90,7 +91,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
               <Ionicons 
                 name={getIconName(route.name)}
                 size={30}
-                color={Color.white}
+                color={isFocused ? Color.teal : Color.white}
               />
             </TouchableOpacity>
              </View>
