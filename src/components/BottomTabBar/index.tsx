@@ -58,8 +58,6 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
             }
           };
 
-          console.log(state.index)
-
           const onLongPress = () => {
             navigation.emit({
               type: 'tabLongPress',
