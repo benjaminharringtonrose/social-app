@@ -18,7 +18,13 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     backgroundColor: 'transparent', 
     paddingTop: 10  
-  }
+  },
+  tabIndicator: { 
+    position: 'absolute', 
+    height: 4, 
+    borderRadius: 2, 
+    backgroundColor: Color.teal 
+  },
 });
 
 export default styles;

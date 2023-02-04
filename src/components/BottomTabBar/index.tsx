@@ -37,7 +37,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
 
   return (
     <BlurView tint="dark" intensity={50} style={styles.blurView}>
-      <Reanimated.View style={[{ position: 'absolute', height: 4, borderRadius: 2, width: tabWidth, backgroundColor: Color.teal }, animStyle]} />
+      <Reanimated.View style={[styles.tabIndicator, { width: tabWidth }, animStyle]} />
       <View style={styles.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
