@@ -12,9 +12,10 @@ import { Color, Size } from '../../constants';
 import styles from './styles';
 
 const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
-  const { bottom } = useSafeAreaInsets();
   const indicatorOffset = useSharedValue(0);
-  const [animate, toggleAnimation] = useState(false);
+  const [animate, triggerAnimation] = useState(false);
+
+  const { bottom } = useSafeAreaInsets();
 
   const tabCount = state.routes?.length;
   const tabWidth = Size.width / tabCount;
@@ -25,7 +26,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
   }
 
   useEffect(() => {
-    indicatorOffset.value = withTiming((state.index) * tabWidth, timingConfig);
+    indicatorOffset.value = withTiming(state.index * tabWidth, timingConfig);
   }, [animate]);
 
   const animStyle = useAnimatedStyle(() => {
@@ -43,13 +44,12 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
           const isFocused = state.index === index;
 
           const onPress = () => {
-            toggleAnimation((_animate) => !_animate);
+            triggerAnimation((_animate) => !_animate);
             const event = navigation.emit({
               type: 'tabPress',
               target: route.key,
               canPreventDefault: true,
             });
-
             if (!isFocused && !event.defaultPrevented) {
               navigation.navigate({ 
                 name: route.name,
