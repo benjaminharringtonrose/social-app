@@ -1,12 +1,36 @@
 import React, { FC } from 'react';
-import { View, Text } from 'react-native';
-import { Color } from '../../constants';
+import { View, Text, ScrollView } from 'react-native';
+import { RootView } from '../../components';
+import { Color, Size } from '../../constants';
 
 const HomeScreen: FC = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: Color.black }}>
-      <Text>Home Screen</Text>
-    </View>
+    <RootView>
+      <ScrollView>
+      <View style={{ 
+        backgroundColor: 'white', 
+        marginHorizontal: Size.gutter, 
+        height: Size.height / 2,
+        borderRadius: 10,
+        marginBottom: Size.gutter 
+        }}/>
+              <View style={{ 
+        backgroundColor: 'white', 
+        marginHorizontal: Size.gutter, 
+        height: Size.height / 2,
+        borderRadius: 10,
+        marginBottom: Size.gutter 
+        }}/>
+              <View style={{ 
+        backgroundColor: 'white', 
+        marginHorizontal: Size.gutter, 
+        height: Size.height / 2,
+        borderRadius: 10,
+        marginBottom: Size.gutter 
+        }}/>
+      </ScrollView>
+
+    </RootView>
   );
 };
 

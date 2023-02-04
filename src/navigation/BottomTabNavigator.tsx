@@ -1,8 +1,10 @@
 import React, {FC} from 'react';
+import { StyleSheet } from 'react-native';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { HomeScreen, MessagesScreen, NotificationsScreen, PostScreen, SettingsScreen } from '../screens';
 import { BottomTabBar } from '../components';
+import { BlurView } from 'expo-blur';
 
 const navigatorScreenOptions: BottomTabNavigationOptions = {
   headerShown: false,
