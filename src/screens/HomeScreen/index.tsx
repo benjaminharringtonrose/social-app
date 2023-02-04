@@ -6,8 +6,7 @@ import { Size, Mock } from '../../constants';
 
 const HomeScreen: FC = () => {
 
-  const renderItem = ({ item }: ListRenderItemInfo<IContent>) => {
-    return (
+  const renderItem = ({ item }: ListRenderItemInfo<IContent>) => (
       <ContentCard 
         id={item.id} 
         avatarUrl={item.avatarUrl} 
@@ -18,8 +17,7 @@ const HomeScreen: FC = () => {
         likes={item.likes}
         comments={item.comments}
       />
-    )
-  };
+    );
 
   return (
     <RootView>

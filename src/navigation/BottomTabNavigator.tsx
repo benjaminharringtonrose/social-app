@@ -11,7 +11,7 @@ const navigatorScreenOptions: BottomTabNavigationOptions = {
   headerShown: true,
   headerBackground: () => 
     <BlurView 
-      tint="default" 
+      tint="dark" 
       intensity={50} 
       style={StyleSheet.absoluteFill}
     />,

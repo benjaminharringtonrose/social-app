@@ -15,5 +15,12 @@ export const Color = {
   tertiaryLabel: "rgba(0.92, 0.92, 0.96, 0.3)",
   quaternaryLabel: "rgba(0.92, 0.92, 0.96, 0.18)",
   placeholderText: "rgba(0.92, 0.92, 0.96, 0.3)",
-  separator: "rgba(0.33, 0.33, 0.35, 0.6)"
+  separator: "rgba(0.33, 0.33, 0.35, 0.6)",
+
+  gray: "#8E8E93",
+  gray2: "#636366",
+  gray3: "#48484A",
+  gray4: "#3A3A3C",
+  gray5: "#2C2C2E",
+  gray6: "#1C1C1E",
 };

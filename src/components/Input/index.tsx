@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
-import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, WithSpringConfig, withTiming, Easing } from 'react-native-reanimated';
+import Reanimated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { Color } from '../../constants';
 
 import styles from './styles';
