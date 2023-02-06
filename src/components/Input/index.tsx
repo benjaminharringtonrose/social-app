@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
-import Reanimated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
-import { Color } from '../../constants';
+import Reanimated, { useAnimatedStyle, useSharedValue, withTiming, Easing, WithTimingConfig } from 'react-native-reanimated';
+import { Color, Font } from '../../constants';
 
 import styles from './styles';
 
@@ -33,8 +33,13 @@ const Input: FC<IProps> = ({
     };
   }, [isFocused]);
 
+  const timingConfig: WithTimingConfig = {
+    duration: 250,
+    easing: Easing.linear
+  };
+
   return (
-    <View style={[styles.input, isFocused && { borderColor: '#A9A9A9' }]}>
+    <View style={[styles.input, isFocused && { borderColor: Color.gray2, borderWidth: 1 }]}>
       <Reanimated.Text style={[styles.placeholderText, animStyle]}>{placeholder}</Reanimated.Text>
       <View style={styles.row}>
         {!!leadingIcon && (
@@ -46,25 +51,25 @@ const Input: FC<IProps> = ({
           onChangeText={onChangeText}
           onFocus={() => {
             setIsFocused(true);
-            placeholderOffset.value = withTiming(-18, { easing: Easing.ease, duration: 150 });
-            placeholderOpacity.value = withTiming(0);
+            placeholderOffset.value = withTiming(-18, timingConfig);
+            placeholderOpacity.value = withTiming(0, timingConfig);
           }}
           onBlur={() => {
             setIsFocused(false);
             if(!value) {
-              placeholderOffset.value = withTiming(0);
-              placeholderOpacity.value = withTiming(1);
+              placeholderOffset.value = withTiming(0, timingConfig);
+              placeholderOpacity.value = withTiming(1, timingConfig);
             }
 
           }}
           value={value}
-          selectionColor={"white"}
+          selectionColor={Color.gray}
           autoCapitalize={"none"}
           {...textInputProps}
           style={{ 
             flex: 1, 
             color: Color.lightGrey, 
-            fontFamily: "Montserrat-Regular",
+            fontFamily: Font.family.montserratRegular,
             marginLeft: 16
           }}
         />

@@ -1,4 +1,4 @@
-interface IContent {
+export interface IContent {
   id: string;
   avatarUrl?: string;
   name: string;

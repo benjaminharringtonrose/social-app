@@ -90,7 +90,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
             >
               <Ionicons 
                 name={getIconName(route.name)}
-                size={30}
+                size={25}
                 color={isFocused ? Color.teal : Color.white}
               />
             </TouchableOpacity>

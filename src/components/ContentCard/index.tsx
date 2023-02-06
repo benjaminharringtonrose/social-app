@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Color, Size } from '../../constants';
 
 import styles from './styles';
+import { IContent } from '../../types';
 
 const ContentCard: FC<IContent> = ({
   avatarUrl,

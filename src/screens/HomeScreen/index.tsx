@@ -3,6 +3,7 @@ import { FlatList, ListRenderItemInfo, View } from 'react-native';
 
 import { ContentCard, RootView } from '../../components';
 import { Size, Mock } from '../../constants';
+import { IContent } from '../../types';
 
 const HomeScreen: FC = () => {
 

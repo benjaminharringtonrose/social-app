@@ -64,7 +64,7 @@ const LoginScreen: FC = () => {
             onChangeText={setPassword}
             value={password}
             placeholder={"PASSWORD"}
-            leadingIcon={(isFocused) => {
+            leadingIcon={(_isFocused) => {
               return (
                 <Ionicons 
                   name="lock-closed-outline" 
