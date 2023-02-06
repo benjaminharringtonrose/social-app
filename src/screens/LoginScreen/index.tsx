@@ -5,7 +5,7 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { StatusBar } from 'expo-status-bar';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth/react-native";
 
 import { Button, Input, AuthRootView } from '../../components';
 import { Color } from '../../constants';
@@ -14,7 +14,6 @@ import { useAuth } from '../../store';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
-import { auth } from '../../api';
 
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
 
@@ -27,6 +26,7 @@ const LoginScreen: FC = () => {
   const navigation = useNavigation<TNavigationProp>();
 
   const onEmailPasswordLogin = () => {
+    const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;

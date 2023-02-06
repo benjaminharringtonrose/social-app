@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { NavigatorScreenParams } from "@react-navigation/native";
@@ -6,6 +6,7 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 import { BottomTabNavigator, BottomTabParamList } from './BottomTabNavigator';
 import { AuthNavigator, AuthStackParamList } from './AuthNavigator';
 import { useAuth } from '../store';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
@@ -20,7 +21,22 @@ type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator: FC = () => {
-  const { auth } = useAuth();
+  const { auth, setUser } = useAuth();
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        setUser(user);
+      } else {
+        // User is signed out
+        setUser(undefined);
+      }
+    });
+    return unsubscribeFromAuthStatuChanged;
+  }, []);
   
   return (
     <Stack.Navigator screenOptions={navigatorScreenOptions}>

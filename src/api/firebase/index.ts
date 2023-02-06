@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth/react-native";
 import { getFirestore } from "firebase/firestore";
 import Constants from 'expo-constants';
 
@@ -15,6 +15,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase Authentication and get a reference to the service
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const firestore = getFirestore(app);
+const firestore = getFirestore(app);

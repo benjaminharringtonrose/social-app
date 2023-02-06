@@ -1,14 +1,12 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const { height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: 'black'
   },
   titleText: {
-    fontSize: 72,
+    fontSize: 60,
     color: "white",
     fontFamily: 'Montserrat-Medium'
   },
