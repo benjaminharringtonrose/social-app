@@ -44,9 +44,9 @@ const LoginScreen: FC = () => {
           <Input 
             onChangeText={setEmail} 
             value={email}
-            textInputProps={{ returnKeyType: 'next', clearButtonMode: 'always' }}
+            textInputProps={{ returnKeyType: 'next' }}
             placeholder={"EMAIL"}
-            leadingIcon={(isFocused) => {
+            leadingIcon={(_isFocused) => {
               return (
                 <Ionicons 
                   name="mail-outline" 

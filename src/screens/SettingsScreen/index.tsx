@@ -29,7 +29,12 @@ const SettingsScreen: FC = () => {
   }, []);
 
   const onSignout = async () => {
-    await signOut(auth);
+    try {
+      await signOut(auth);
+    } catch(e) {
+      console.warn(e);
+    }
+    
   };
 
 
@@ -38,13 +43,7 @@ const SettingsScreen: FC = () => {
     <RootView>
       <View style={{ marginTop: 50, padding: Size.gutter }}>
         <Text style={styles.sectionText}>{'Account'}</Text>
-        <TouchableOpacity onPress={() => {
-          signOut(auth)
-          .then(() => {
-            console.log('signout successful');
-          })
-          .catch(e => console.log(e.message));;
-        }} style={{ flexDirection: 'row', alignItems: 'center', borderTopWidth: 1, borderBottomWidth: 1, borderColor: Color.gray5, padding: Size.gutter }}>
+        <TouchableOpacity onPress={() => {}} style={{ flexDirection: 'row', alignItems: 'center', borderTopWidth: 1, borderBottomWidth: 1, borderColor: Color.gray5, padding: Size.gutter }}>
           <Image style={styles.avatarPlaceholder} source={{ uri: 'https://picsum.photos/100/100' }} />
           <View style={{flex: 1, justifyContent: 'center'}}>
             <Text style={{ color: Color.white }}>{"John Smith"}</Text>

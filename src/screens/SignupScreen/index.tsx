@@ -21,8 +21,8 @@ const SignupScreen: FC = () => {
   const navigation = useNavigation<TNavigationProp>();
 
   const onEmailPasswordSignup = async () => {
-    const auth = getAuth();
     try {
+      const auth = getAuth();
       await createUserWithEmailAndPassword(auth, email, password)
     } catch(e) {
       console.warn(e);

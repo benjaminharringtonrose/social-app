@@ -10,8 +10,8 @@ interface IProps {
   value: string;
   textInputProps?: TextInputProps;
   placeholder?: string;
-  leadingIcon?: (isFocused: boolean) => JSX.Element;
-  trailingIcon?: (isFocused: boolean) => JSX.Element;
+  leadingIcon?: (_isFocused: boolean) => JSX.Element;
+  trailingIcon?: (_isFocused: boolean) => JSX.Element;
 }
 
 const Input: FC<IProps> = ({ 
@@ -23,11 +23,13 @@ const Input: FC<IProps> = ({
   placeholder
 }) => {
   const placeholderOffset = useSharedValue(0);
+  const placeholderOpacity = useSharedValue(1);
   const [isFocused, setIsFocused] = useState(false);
 
   const animStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: placeholderOffset.value }],
+      opacity: placeholderOpacity.value
     };
   }, [isFocused]);
 
@@ -45,11 +47,13 @@ const Input: FC<IProps> = ({
           onFocus={() => {
             setIsFocused(true);
             placeholderOffset.value = withTiming(-18, { easing: Easing.ease, duration: 150 });
+            placeholderOpacity.value = withTiming(0);
           }}
           onBlur={() => {
             setIsFocused(false);
             if(!value) {
               placeholderOffset.value = withTiming(0);
+              placeholderOpacity.value = withTiming(1);
             }
 
           }}

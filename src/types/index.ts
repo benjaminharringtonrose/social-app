@@ -8,3 +8,9 @@ interface IContent {
   likes?: number;
   comments?: number;
 }
+
+export enum AuthEnum {
+  Authenticated = 'Authenticated',
+  Unauthenticated = 'Unauthenticated',
+  None = 'None'
+}

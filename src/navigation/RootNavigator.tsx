@@ -7,7 +7,9 @@ import { BottomTabNavigator, BottomTabParamList } from './BottomTabNavigator';
 import { AuthNavigator, AuthStackParamList } from './AuthNavigator';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRecoilValue } from 'recoil';
-import { userSelector } from '../store/auth';
+import { authStateSelector, userSelector } from '../store/auth';
+import { AuthEnum } from '../types';
+import { LoadingScreen } from '../screens';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
@@ -15,21 +17,24 @@ const navigatorScreenOptions: NativeStackNavigationOptions = {
 
 type RootStackParamList = {
   BottomTabNavigator: NavigatorScreenParams<BottomTabParamList>;
-  AuthNavigator: NavigatorScreenParams<AuthStackParamList>
+  AuthNavigator: NavigatorScreenParams<AuthStackParamList>;
+  LoadingScreen: undefined;
   LoginScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator: FC = () => {
-  const user = useRecoilValue(userSelector);
+  const state = useRecoilValue(authStateSelector);
   
   return (
     <Stack.Navigator screenOptions={navigatorScreenOptions}>
-      {!!user ? (
-        <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
-      ) : (
+      {state === AuthEnum.Authenticated ? (
+        <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ animation: 'fade' }} />
+      ) : state === AuthEnum.Unauthenticated ? (
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
+      ) : (
+        <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
       )}
     </Stack.Navigator>
   )
