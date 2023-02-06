@@ -5,3 +5,4 @@ export { default as ContentCard } from './ContentCard';
 export { default as Input } from './Input';
 export { default as Listeners } from './Listeners';
 export { default as RootView } from './RootView';
+export { default as SettingRow } from './SettingRow';

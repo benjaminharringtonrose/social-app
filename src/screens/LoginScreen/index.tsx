@@ -17,17 +17,21 @@ import styles from './styles';
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
 
 const LoginScreen: FC = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation<TNavigationProp>();
 
   const onEmailPasswordLogin = async () => {
-    const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(auth, email, password)
+      setLoading(true);
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false);
     } catch(e) {
       console.warn(e);
+      setLoading(false);
     }
   };
 
@@ -71,7 +75,7 @@ const LoginScreen: FC = () => {
             }}
             textInputProps={{ secureTextEntry: true }}
           />
-          <Button label={"LOGIN"} onPress={onEmailPasswordLogin} />
+          <Button label={"LOGIN"} onPress={onEmailPasswordLogin} loading={loading} />
           <TouchableOpacity onPress={() => {}}>
             <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
           </TouchableOpacity>
