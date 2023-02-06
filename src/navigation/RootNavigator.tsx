@@ -5,8 +5,9 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 
 import { BottomTabNavigator, BottomTabParamList } from './BottomTabNavigator';
 import { AuthNavigator, AuthStackParamList } from './AuthNavigator';
-import { useAuth } from '../store';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useRecoilValue } from 'recoil';
+import { userSelector } from '../store/auth';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
@@ -21,26 +22,11 @@ type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator: FC = () => {
-  const { auth, setUser } = useAuth();
-
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        setUser(user);
-      } else {
-        // User is signed out
-        setUser(undefined);
-      }
-    });
-    return unsubscribeFromAuthStatuChanged;
-  }, []);
+  const user = useRecoilValue(userSelector);
   
   return (
     <Stack.Navigator screenOptions={navigatorScreenOptions}>
-      {!!auth.user ? (
+      {!!user ? (
         <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       ) : (
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />

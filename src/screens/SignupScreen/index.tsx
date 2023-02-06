@@ -11,7 +11,6 @@ import { isIOS } from '../../utils';
 import styles from './styles';
 import { StatusBar } from 'expo-status-bar';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { useAuth } from '../../store';
 
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'SignupScreen'>;
 
@@ -19,20 +18,15 @@ const SignupScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setUser } = useAuth();
-
   const navigation = useNavigation<TNavigationProp>();
 
-  const onEmailPasswordSignup = () => {
+  const onEmailPasswordSignup = async () => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      setUser(user);
-    })
-    .catch((error) => {
-      console.log(error.message)
-    });
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+    } catch(e) {
+      console.warn(e);
+    }
   };
 
   return (

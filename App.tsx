@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { RecoilRoot } from 'recoil';
 
 import { RootNavigator } from './src/navigation/RootNavigator';
+import { Listeners } from './src/components';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,12 +27,13 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-  
+
   return (
     <RecoilRoot>
       <NavigationContainer>
         <RootNavigator />
       </NavigationContainer>
+      <Listeners />
     </RecoilRoot>
 
   );

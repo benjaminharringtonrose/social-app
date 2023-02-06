@@ -10,7 +10,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth/react-native"
 import { Button, Input, AuthRootView } from '../../components';
 import { Color } from '../../constants';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
-import { useAuth } from '../../store';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
@@ -21,20 +20,15 @@ const LoginScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setUser } = useAuth();
-
   const navigation = useNavigation<TNavigationProp>();
 
-  const onEmailPasswordLogin = () => {
+  const onEmailPasswordLogin = async () => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      setUser(user);
-    })
-    .catch((error) => {
-      console.log(error.message)
-    });
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+    } catch(e) {
+      console.warn(e);
+    }
   };
 
   return (

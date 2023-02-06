@@ -1,11 +1,14 @@
-import { User } from "firebase/auth";
-import { atom, selector, useRecoilState } from "recoil";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { useEffect } from "react";
+import { atom, selector, useSetRecoilState } from "recoil";
 
 interface IAuthState {
   user?: User;
 }
 
-const authState = atom<IAuthState>({
+const auth = getAuth();
+
+export const authState = atom<IAuthState>({
   key: 'authState',
   dangerouslyAllowMutability: true,
   default: {
@@ -13,22 +16,24 @@ const authState = atom<IAuthState>({
   },
 });
 
-const userSelector = selector({
+export const userSelector = selector({
   key: 'userSelector',
+  dangerouslyAllowMutability: true,
   get: ({get}) => get(authState).user,
 });
 
 
-export const useAuth = () => {
-  const [auth, setAuthState] = useRecoilState(authState);
-
-  const setUser = (user?: User) => {
-    setAuthState((prevState) => ({ ...prevState, user }));
-  };
-
-  return {
-    auth,
-    setUser
-  }
+export const useAuthListener = () => {
+  const setAuthState = useSetRecoilState(authState)
+  useEffect(() => {
+    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthState((prevState) => ({ ...prevState, user }));
+      } else {
+        setAuthState((prevState) => ({ ...prevState, user: undefined }));
+      }
+    });
+    return unsubscribeFromAuthStatuChanged;
+  }, []);
 };
 

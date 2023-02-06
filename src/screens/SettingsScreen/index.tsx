@@ -18,24 +18,19 @@ const SettingsScreen: FC = () => {
 
   const navigation = useNavigation<TNavigationProp>();
 
-
-
-
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={async () => {
-          signOut(auth)
-          .then(() => {
-            console.log('signout successful');
-          })
-          .catch(e => console.log(e.message));
-        }}>
+        <TouchableOpacity onPress={onSignout}>
           <Text style={{ color: Color.white, fontFamily: Font.family.montserratMedium, paddingRight: Size.gutter }}>{"Signout"}</Text>
         </TouchableOpacity>
       )      
     });
   }, []);
+
+  const onSignout = async () => {
+    await signOut(auth);
+  };
 
 
 
