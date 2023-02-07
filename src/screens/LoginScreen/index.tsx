@@ -10,6 +10,7 @@ import { Formik } from 'formik';
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import useNavigationTransition from '../../hooks/useNavigationTransition';
 
 import styles from './styles';
 
@@ -23,7 +24,8 @@ interface IFormProps {
 const LoginScreen: FC = () => {
   const [loading, setLoading] = useState(false);
   const passwordInput = useRef<TextInput>(null!);
-  const navigation = useNavigation<TNavigationProp>();
+
+  const { NavigationTransition, navigation } = useNavigationTransition();
 
   const onEmailPasswordLogin = async (values: IFormProps) => {
     try {
@@ -42,44 +44,46 @@ const LoginScreen: FC = () => {
       <StatusBar style={'light'} />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView behavior={'padding'} style={styles.bottomHalfContainer}>
-        <Text style={styles.subtitleText}>{'Login'}</Text>
-        <Text style={styles.descriptionText}>{'Welcome back to the Social experience.'}</Text>
-        <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordLogin}>
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <>
-              <Input
-                onChangeText={handleChange('email')}
-                value={values.email}
-                placeholder={'EMAIL'}
-                LeadingIcon={<Ionicons name={'mail-outline'} size={24} color={Color.grey} />}
-                textInputProps={{
-                  returnKeyType: 'next',
-                  blurOnSubmit: false,
-                  onSubmitEditing: () => {
-                    handleBlur('email');
-                    passwordInput.current?.focus();
-                  },
-                }}
-              />
-              <Input
-                ref={passwordInput}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-                placeholder={'PASSWORD'}
-                LeadingIcon={<Ionicons name={'lock-closed-outline'} size={24} color={Color.grey} />}
-                textInputProps={{ secureTextEntry: true, returnKeyType: 'go' }}
-              />
-              <Button label={'LOGIN'} onPress={handleSubmit} loading={loading} />
-            </>
-          )}
-        </Formik>
-        <PressableText label={'Forgot Password?'} fontSize={16} color={Color.teal} onPress={() => {}} style={{ alignItems: 'center' }} />
-        <View style={styles.socialsContainer}>
-          <PressableSocial name={'facebook-square'} size={40} color={Color.teal} onPress={() => {}} />
-          <PressableSocial name={'apple'} size={40} color={Color.teal} onPress={() => {}} style={{ marginHorizontal: 30 }} />
-          <PressableSocial name={'google'} size={40} color={Color.teal} onPress={() => {}} />
-        </View>
+        <NavigationTransition>
+          <Text style={styles.subtitleText}>{'Login'}</Text>
+          <Text style={styles.descriptionText}>{'Welcome back to the Social experience.'}</Text>
+          <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordLogin}>
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <>
+                <Input
+                  onChangeText={handleChange('email')}
+                  value={values.email}
+                  placeholder={'EMAIL'}
+                  LeadingIcon={<Ionicons name={'mail-outline'} size={24} color={Color.grey} />}
+                  textInputProps={{
+                    returnKeyType: 'next',
+                    blurOnSubmit: false,
+                    onSubmitEditing: () => {
+                      handleBlur('email');
+                      passwordInput.current?.focus();
+                    },
+                  }}
+                />
+                <Input
+                  ref={passwordInput}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  placeholder={'PASSWORD'}
+                  LeadingIcon={<Ionicons name={'lock-closed-outline'} size={24} color={Color.grey} />}
+                  textInputProps={{ secureTextEntry: true, returnKeyType: 'go' }}
+                />
+                <Button label={'LOGIN'} onPress={handleSubmit} loading={loading} />
+              </>
+            )}
+          </Formik>
+          <PressableText label={'Forgot Password?'} fontSize={16} color={Color.teal} onPress={() => {}} style={{ alignItems: 'center' }} />
+          <View style={styles.socialsContainer}>
+            <PressableSocial name={'facebook-square'} size={40} color={Color.teal} onPress={() => {}} />
+            <PressableSocial name={'apple'} size={40} color={Color.teal} onPress={() => {}} style={{ marginHorizontal: 30 }} />
+            <PressableSocial name={'google'} size={40} color={Color.teal} onPress={() => {}} />
+          </View>
+        </NavigationTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
         <Text style={styles.accountQText}>{"Don't have an account? "}</Text>

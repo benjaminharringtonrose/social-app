@@ -14,3 +14,22 @@ export enum AuthEnum {
   Unauthenticated = 'Unauthenticated',
   None = 'None'
 }
+
+export enum RootScreens {
+  BottomTabNavigator = "BottomTabNavigator",
+  AuthNavigator = "AuthNavigator",
+  LoadingScreen = "LoadingScreen"
+}
+
+export enum AuthScreens {
+  LoginScreen = "LoginScreen",
+  SignupScreen = "SignupScreen",
+}
+
+export enum BottomTabScreens {
+  HomeScreen = "HomeScreen",
+  MessagesScreen = "MessagesScreen",
+  PostScreen = "PostScreen",
+  NotificationScreen = "NotificationsScreen",
+  SettingsScreen = "SettingsScreen",
+}
