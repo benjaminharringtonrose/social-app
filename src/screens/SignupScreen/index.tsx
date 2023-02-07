@@ -1,30 +1,41 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { FC, useState } from 'react';
-import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import React, { FC, useRef, useState } from "react";
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-import { AuthRootView, Input, Button } from '../../components';
-import { AuthStackParamList } from '../../navigation/AuthNavigator';
-import { isIOS } from '../../utils';
+import { AuthRootView, Input, Button } from "../../components";
+import { AuthStackParamList } from "../../navigation/AuthNavigator";
+import { isIOS } from "../../utils";
 
-import styles from './styles';
-import { StatusBar } from 'expo-status-bar';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import styles from "./styles";
+import { StatusBar } from "expo-status-bar";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'SignupScreen'>;
+type TNavigationProp = NativeStackNavigationProp<
+  AuthStackParamList,
+  "SignupScreen"
+>;
 
 const SignupScreen: FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const passwordInput = useRef<TextInput>(null!);
 
   const navigation = useNavigation<TNavigationProp>();
 
   const onEmailPasswordSignup = async () => {
     try {
       const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, email, password)
-    } catch(e) {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (e) {
       console.warn(e);
     }
   };
@@ -32,52 +43,62 @@ const SignupScreen: FC = () => {
   return (
     <AuthRootView backgroundTitle={"Social"}>
       <StatusBar style="light" />
-      <View style={styles.topHalfContainer}/>
-        <KeyboardAvoidingView
-          behavior={isIOS() ? 'padding' : 'height'}
-          style={styles.bottomHalfContainer}
+      <View style={styles.topHalfContainer} />
+      <KeyboardAvoidingView
+        behavior={isIOS() ? "padding" : "height"}
+        style={styles.bottomHalfContainer}
+      >
+        <Text style={styles.subtitleText}>{"Sign Up"}</Text>
+        <Text style={styles.descriptionText}>
+          {"Choose how you'd like to sign up."}
+        </Text>
+        <Input
+          onChangeText={setEmail}
+          value={email}
+          textInputProps={{
+            returnKeyType: "next",
+            blurOnSubmit: false,
+            onSubmitEditing: () => {
+              passwordInput.current.focus();
+            },
+          }}
+          placeholder={"EMAIL"}
+          leadingIcon={(isFocused) => {
+            return <Ionicons name="mail-outline" size={24} color={"#A9A9A9"} />;
+          }}
+        />
+        <Input
+          onChangeText={setPassword}
+          value={password}
+          textInputProps={{
+            returnKeyType: "go",
+            onSubmitEditing: () => {
+              onEmailPasswordSignup();
+            },
+          }}
+          ref={passwordInput}
+          placeholder={"PASSWORD"}
+          leadingIcon={(isFocused) => {
+            return (
+              <Ionicons
+                name="lock-closed-outline"
+                size={24}
+                color={"#A9A9A9"}
+              />
+            );
+          }}
+        />
+        <Button label={"Sign Up"} onPress={onEmailPasswordSignup} />
+      </KeyboardAvoidingView>
+      <View style={styles.signupContainer}>
+        <Text style={styles.accountQText}>{"Already have an account? "}</Text>
+        <TouchableOpacity
+          onPress={() => navigation.popToTop()}
+          style={{ paddingVertical: 20 }}
         >
-          <Text style={styles.subtitleText}>{"Sign Up"}</Text>
-          <Text style={styles.descriptionText}>{"Choose how you'd like to sign up."}</Text>
-          <Input
-            onChangeText={setEmail} 
-            value={email}
-            textInputProps={{ returnKeyType: 'next' }}
-            placeholder={"EMAIL"}
-            leadingIcon={(isFocused) => {
-              return (
-                <Ionicons 
-                  name="mail-outline" 
-                  size={24} 
-                  color={'#A9A9A9'}
-                />
-              );
-            }}
-          />
-          <Input
-            onChangeText={setPassword}
-            value={password}
-            textInputProps={{ returnKeyType: 'go' }}
-            placeholder={"PASSWORD"}
-            leadingIcon={(isFocused) => {
-              return (
-                <Ionicons 
-                  name="lock-closed-outline" 
-                  size={24}
-                  color={'#A9A9A9'} 
-                />
-              );
-            }}
-          />
-          <Button label={"Sign Up"} onPress={onEmailPasswordSignup} />
-        </KeyboardAvoidingView>
-        <View style={styles.signupContainer}>
-          <Text style={styles.accountQText}>{"Already have an account? "}</Text>
-          <TouchableOpacity onPress={() => navigation.popToTop()} style={{ paddingVertical: 20 }}>
-            <Text style={styles.ctaText}>{"Sign in"}</Text>
-          </TouchableOpacity>
-        </View>
-
+          <Text style={styles.ctaText}>{"Sign in"}</Text>
+        </TouchableOpacity>
+      </View>
     </AuthRootView>
   );
 };
