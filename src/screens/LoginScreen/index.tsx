@@ -1,23 +1,15 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { FC, useRef, useState } from "react";
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TextInput,
-} from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { StatusBar } from "expo-status-bar";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth/react-native";
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { FC, useRef, useState } from 'react';
+import { View, Text, KeyboardAvoidingView, TextInput } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { StatusBar } from 'expo-status-bar';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth/react-native';
 import { Formik } from 'formik';
 
-import { Button, Input, AuthRootView, PressableSocial, PressableText } from "../../components";
-import { Color } from "../../constants";
-import { AuthStackParamList } from "../../navigation/AuthNavigator";
+import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
+import { Color } from '../../constants';
+import { AuthStackParamList } from '../../navigation/AuthNavigator';
 
 import styles from './styles';
 
@@ -57,14 +49,17 @@ const LoginScreen: FC = () => {
             <>
               <Input
                 onChangeText={handleChange('email')}
-                onBlur={() => {
-                  handleBlur('email');
-                  passwordInput.current?.focus();
-                }}
                 value={values.email}
                 placeholder={'EMAIL'}
                 LeadingIcon={<Ionicons name={'mail-outline'} size={24} color={Color.grey} />}
-                textInputProps={{ returnKeyType: 'next' }}
+                textInputProps={{
+                  returnKeyType: 'next',
+                  blurOnSubmit: false,
+                  onSubmitEditing: () => {
+                    handleBlur('email');
+                    passwordInput.current?.focus();
+                  },
+                }}
               />
               <Input
                 ref={passwordInput}
