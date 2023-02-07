@@ -5,11 +5,9 @@ import {
   View,
   Text,
   KeyboardAvoidingView,
-  TouchableOpacity,
   TextInput,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { StatusBar } from "expo-status-bar";
 import {
   getAuth,
@@ -18,7 +16,7 @@ import {
 import { Formik } from 'formik';
 
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from "../../components";
-import { Color, Font } from "../../constants";
+import { Color } from "../../constants";
 import { AuthStackParamList } from "../../navigation/AuthNavigator";
 import { isIOS } from "../../utils";
 
