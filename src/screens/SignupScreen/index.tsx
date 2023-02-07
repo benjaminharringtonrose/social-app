@@ -9,34 +9,41 @@ import {
   TextInput,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Formik } from 'formik';
 
-import { AuthRootView, Input, Button } from "../../components";
+import { AuthRootView, Input, Button, PressableText } from "../../components";
 import { AuthStackParamList } from "../../navigation/AuthNavigator";
 import { isIOS } from "../../utils";
 
 import styles from "./styles";
 import { StatusBar } from "expo-status-bar";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Color } from "../../constants";
 
 type TNavigationProp = NativeStackNavigationProp<
   AuthStackParamList,
   "SignupScreen"
 >;
 
+interface IFormProps { 
+  email: string; 
+  password: string 
+}
+
 const SignupScreen: FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const passwordInput = useRef<TextInput>(null!);
-
   const navigation = useNavigation<TNavigationProp>();
 
-  const onEmailPasswordSignup = async () => {
+  const onEmailPasswordSignup = async (values: IFormProps) => {
     try {
+      setLoading(true);
       const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
     } catch (e) {
       console.warn(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,57 +54,56 @@ const SignupScreen: FC = () => {
       <KeyboardAvoidingView
         behavior={isIOS() ? "padding" : "height"}
         style={styles.bottomHalfContainer}
+        keyboardVerticalOffset={160}
       >
         <Text style={styles.subtitleText}>{"Sign Up"}</Text>
         <Text style={styles.descriptionText}>
           {"Choose how you'd like to sign up."}
         </Text>
-        <Input
-          onChangeText={setEmail}
-          value={email}
-          textInputProps={{
-            returnKeyType: "next",
-            blurOnSubmit: false,
-            onSubmitEditing: () => {
-              passwordInput.current.focus();
-            },
-          }}
-          placeholder={"EMAIL"}
-          leadingIcon={(isFocused) => {
-            return <Ionicons name="mail-outline" size={24} color={"#A9A9A9"} />;
-          }}
-        />
-        <Input
-          onChangeText={setPassword}
-          value={password}
-          textInputProps={{
-            returnKeyType: "go",
-            onSubmitEditing: () => {
-              onEmailPasswordSignup();
-            },
-          }}
-          ref={passwordInput}
-          placeholder={"PASSWORD"}
-          leadingIcon={(isFocused) => {
-            return (
-              <Ionicons
-                name="lock-closed-outline"
-                size={24}
-                color={"#A9A9A9"}
-              />
-            );
-          }}
-        />
-        <Button label={"Sign Up"} onPress={onEmailPasswordSignup} />
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={onEmailPasswordSignup}
+        >
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <>
+            <Input
+              onChangeText={handleChange("email")}
+              onBlur={() => {
+                handleBlur("email");
+                passwordInput.current?.focus();
+              }}
+              value={values.email}
+              placeholder={"EMAIL"}
+              LeadingIcon={<Ionicons name={"mail-outline"} size={24} color={Color.grey} />}
+              textInputProps={{ returnKeyType: "next" }}
+            />
+            <Input
+              ref={passwordInput}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              placeholder={"PASSWORD"}
+              LeadingIcon={<Ionicons name={"lock-closed-outline"} size={24} color={Color.grey} />}
+              textInputProps={{secureTextEntry: true, returnKeyType: "go" }}
+            />
+            <Button
+              label={"LOGIN"}
+              onPress={handleSubmit}
+              loading={loading}
+            />
+          </>
+        )}
+        </Formik>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
         <Text style={styles.accountQText}>{"Already have an account? "}</Text>
-        <TouchableOpacity
+        <PressableText 
+          label={"Sign in"} 
+          color={Color.teal} 
+          fontSize={16} 
           onPress={() => navigation.popToTop()}
           style={{ paddingVertical: 20 }}
-        >
-          <Text style={styles.ctaText}>{"Sign in"}</Text>
-        </TouchableOpacity>
+        />
       </View>
     </AuthRootView>
   );

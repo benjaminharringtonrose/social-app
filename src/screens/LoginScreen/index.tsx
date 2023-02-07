@@ -135,7 +135,6 @@ const LoginScreen: FC = () => {
           color={Color.teal}
           onPress={() => navigation.navigate("SignupScreen")}
           style={{alignItems: "center", paddingVertical: 20}}
-          bold
         />
       </View>
     </AuthRootView>
