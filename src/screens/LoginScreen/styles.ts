@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
     backgroundColor: Color.lightGrey, 
     borderRadius: 10
   },
+  socialsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 15,
+  }
 });
 
 export default styles;

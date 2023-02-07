@@ -1,4 +1,4 @@
-import React, { ForwardRefRenderFunction, RefObject, useState } from "react";
+import React, { ForwardRefRenderFunction, useState } from "react";
 import { View, TextInput, TextInputProps } from "react-native";
 import Reanimated, {
   useAnimatedStyle,
@@ -13,25 +13,26 @@ import styles from "./styles";
 
 interface IProps {
   onChangeText: (text: string) => void;
+  onBlur: (e: any) => void;
   value: string;
   textInputProps?: TextInputProps;
   placeholder?: string;
-  leadingIcon?: (_isFocused: boolean) => JSX.Element;
-  trailingIcon?: (_isFocused: boolean) => JSX.Element;
-  ref?: RefObject<TextInput>;
+  LeadingIcon?: JSX.Element;
+  TrailingIcon?: JSX.Element;
 }
 
 const Input: ForwardRefRenderFunction<TextInput, IProps> = (
   {
     onChangeText,
+    onBlur,
     value,
-    leadingIcon,
-    trailingIcon,
+    LeadingIcon,
+    TrailingIcon,
     textInputProps,
     placeholder,
   },
   ref
-) => {
+  ) => {
   const placeholderOffset = useSharedValue(0);
   const placeholderOpacity = useSharedValue(1);
   const [isFocused, setIsFocused] = useState(false);
@@ -59,25 +60,26 @@ const Input: ForwardRefRenderFunction<TextInput, IProps> = (
         {placeholder}
       </Reanimated.Text>
       <View style={styles.row}>
-        {!!leadingIcon && (
+        {!!LeadingIcon && (
           <View style={{ paddingLeft: 8, justifyContent: "center" }}>
-            {leadingIcon(isFocused)}
+            {LeadingIcon}
           </View>
         )}
         <TextInput
-          onChangeText={onChangeText}
           ref={ref}
+          onChangeText={onChangeText}
           onFocus={() => {
             setIsFocused(true);
             placeholderOffset.value = withTiming(-18, timingConfig);
             placeholderOpacity.value = withTiming(0, timingConfig);
           }}
-          onBlur={() => {
+          onBlur={(e) => {
             setIsFocused(false);
             if (!value) {
               placeholderOffset.value = withTiming(0, timingConfig);
               placeholderOpacity.value = withTiming(1, timingConfig);
             }
+            onBlur(e);
           }}
           value={value}
           selectionColor={Color.gray}
@@ -90,7 +92,7 @@ const Input: ForwardRefRenderFunction<TextInput, IProps> = (
             marginLeft: 16,
           }}
         />
-        {!!trailingIcon && trailingIcon(isFocused)}
+        {!!TrailingIcon && TrailingIcon}
       </View>
     </View>
   );

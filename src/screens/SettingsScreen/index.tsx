@@ -48,8 +48,8 @@ const SettingsScreen: FC = () => {
         <TouchableOpacity onPress={() => {}} style={{ flexDirection: 'row', alignItems: 'center', borderTopWidth: 1, borderBottomWidth: 1, borderColor: Color.gray5, padding: Size.gutter, marginBottom: 20 }}>
           <Image style={styles.avatarPlaceholder} source={{ uri: 'https://picsum.photos/100/100' }} />
           <View style={{flex: 1, justifyContent: 'center'}}>
-            <Text style={{ color: Color.white }}>{"John Smith"}</Text>
-            <Text style={{ color: Color.gray }}>{"johnsmith@gmail.com"}</Text>
+            <Text style={{ color: Color.white, fontFamily: Font.family.montserratMedium }}>{"John Smith"}</Text>
+            <Text style={{ color: Color.gray, fontFamily: Font.family.montserratMedium }}>{"johnsmith@gmail.com"}</Text>
           </View>
           <Ionicons name={'chevron-forward'} color={Color.gray} size={30} />
         </TouchableOpacity>

@@ -15,9 +15,10 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth/react-native";
+import { Formik } from 'formik';
 
-import { Button, Input, AuthRootView } from "../../components";
-import { Color } from "../../constants";
+import { Button, Input, AuthRootView, PressableSocial, PressableText } from "../../components";
+import { Color, Font } from "../../constants";
 import { AuthStackParamList } from "../../navigation/AuthNavigator";
 import { isIOS } from "../../utils";
 
@@ -28,20 +29,21 @@ type TNavigationProp = NativeStackNavigationProp<
   "LoginScreen"
 >;
 
+interface IFormProps { 
+  email: string; 
+  password: string 
+}
+
 const LoginScreen: FC = () => {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const passwordInput = useRef<TextInput>(null!);
-
   const navigation = useNavigation<TNavigationProp>();
 
-  const onEmailPasswordLogin = async () => {
+  const onEmailPasswordLogin = async (values: IFormProps) => {
     try {
       setLoading(true);
       const auth = getAuth();
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, values.email, values.password);
       setLoading(false);
     } catch (e) {
       console.warn(e);
@@ -51,93 +53,90 @@ const LoginScreen: FC = () => {
 
   return (
     <AuthRootView backgroundTitle={"Social"}>
-      <StatusBar style="light" />
+      <StatusBar style={"light"} />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView
         behavior={isIOS() ? "padding" : "height"}
         style={styles.bottomHalfContainer}
+        keyboardVerticalOffset={160}
       >
         <Text style={styles.subtitleText}>{"Login"}</Text>
         <Text style={styles.descriptionText}>
           {"Welcome back to the Social experience."}
         </Text>
-        <Input
-          onChangeText={setEmail}
-          value={email}
-          textInputProps={{
-            returnKeyType: "next",
-            blurOnSubmit: false,
-            onSubmitEditing: () => {
-              passwordInput.current.focus();
-            },
-          }}
-          placeholder={"EMAIL"}
-          leadingIcon={(_isFocused) => {
-            return <Ionicons name="mail-outline" size={24} color={"#A9A9A9"} />;
-          }}
-        />
-        <Input
-          onChangeText={setPassword}
-          value={password}
-          placeholder={"PASSWORD"}
-          ref={passwordInput}
-          leadingIcon={(_isFocused) => {
-            return (
-              <Ionicons
-                name="lock-closed-outline"
-                size={24}
-                color={"#A9A9A9"}
-              />
-            );
-          }}
-          textInputProps={{
-            secureTextEntry: true,
-            returnKeyType: "go",
-            onSubmitEditing: () => {
-              onEmailPasswordLogin();
-            },
-          }}
-        />
-        <Button
-          label={"LOGIN"}
-          onPress={onEmailPasswordLogin}
-          loading={loading}
-        />
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.ctaText}>{"Forgot Password?"}</Text>
-        </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            marginTop: 15,
-          }}
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={onEmailPasswordLogin}
         >
-          <TouchableOpacity>
-            <FontAwesome
-              name={"facebook-square"}
-              size={40}
-              color={Color.teal}
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <>
+            <Input
+              onChangeText={handleChange("email")}
+              onBlur={() => {
+                handleBlur("email");
+                passwordInput.current?.focus();
+              }}
+              value={values.email}
+              placeholder={"EMAIL"}
+              LeadingIcon={<Ionicons name={"mail-outline"} size={24} color={Color.grey} />}
+              textInputProps={{ returnKeyType: "next" }}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={{ marginHorizontal: 30 }}>
-            <FontAwesome name={"apple"} size={40} color={Color.teal} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <FontAwesome name={"google"} size={40} color={Color.teal} />
-          </TouchableOpacity>
+            <Input
+              ref={passwordInput}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              placeholder={"PASSWORD"}
+              LeadingIcon={<Ionicons name={"lock-closed-outline"} size={24} color={Color.grey} />}
+              textInputProps={{secureTextEntry: true, returnKeyType: "go" }}
+            />
+            <Button
+              label={"LOGIN"}
+              onPress={handleSubmit}
+              loading={loading}
+            />
+          </>
+        )}
+        </Formik>
+        <PressableText
+          label={"Forgot Password?"}
+          fontSize={16}
+          color={Color.teal}
+          onPress={() => {}}
+          style={{alignItems: 'center'}}
+        />
+        <View style={styles.socialsContainer}>
+          <PressableSocial
+            name={"facebook-square"}
+            size={40}
+            color={Color.teal}
+            onPress={() => {}}
+          />
+          <PressableSocial
+            name={"apple"}
+            size={40}
+            color={Color.teal}
+            onPress={() => {}}
+            style={{ marginHorizontal: 30 }}
+          />
+          <PressableSocial
+            name={"google"}
+            size={40}
+            color={Color.teal}
+            onPress={() => {}}
+          />
         </View>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
         <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
-        <TouchableOpacity
+        <PressableText
+          label={"Sign up"}
+          fontSize={16}
+          color={Color.teal}
           onPress={() => navigation.navigate("SignupScreen")}
-          style={{ paddingVertical: 20 }}
-        >
-          <Text style={[styles.ctaText, { fontFamily: "Montserrat-Bold" }]}>
-            {"Sign up"}
-          </Text>
-        </TouchableOpacity>
+          style={{alignItems: "center", paddingVertical: 20}}
+          bold
+        />
       </View>
     </AuthRootView>
   );
