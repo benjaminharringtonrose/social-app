@@ -19,10 +19,7 @@ import { StatusBar } from "expo-status-bar";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Color } from "../../constants";
 
-type TNavigationProp = NativeStackNavigationProp<
-  AuthStackParamList,
-  "SignupScreen"
->;
+type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'SignupScreen'>;
 
 interface IFormProps { 
   email: string; 
@@ -47,7 +44,7 @@ const SignupScreen: FC = () => {
   };
 
   return (
-    <AuthRootView backgroundTitle={"Social"}>
+    <AuthRootView backgroundTitle={'Social'}>
       <StatusBar style="light" />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView

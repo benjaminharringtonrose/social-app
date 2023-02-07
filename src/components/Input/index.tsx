@@ -1,4 +1,4 @@
-import React, { ForwardRefRenderFunction, useState } from "react";
+import React, { ForwardRefRenderFunction, ReactElement, useState } from "react";
 import { View, TextInput, TextInputProps } from "react-native";
 import Reanimated, {
   useAnimatedStyle,
@@ -13,12 +13,12 @@ import styles from "./styles";
 
 interface IProps {
   onChangeText: (text: string) => void;
-  onBlur: (e: any) => void;
+  onBlur?: (e: any) => void;
   value: string;
   textInputProps?: TextInputProps;
   placeholder?: string;
-  LeadingIcon?: JSX.Element;
-  TrailingIcon?: JSX.Element;
+  LeadingIcon?: ReactElement<any, any>;
+  TrailingIcon?: ReactElement<any, any>;
 }
 
 const Input: ForwardRefRenderFunction<TextInput, IProps> = (
@@ -79,7 +79,7 @@ const Input: ForwardRefRenderFunction<TextInput, IProps> = (
               placeholderOffset.value = withTiming(0, timingConfig);
               placeholderOpacity.value = withTiming(1, timingConfig);
             }
-            onBlur(e);
+            onBlur?.(e);
           }}
           value={value}
           selectionColor={Color.gray}
