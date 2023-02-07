@@ -7,6 +7,7 @@ import { AuthScreens } from '../types';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
+  animation: 'none',
 }
 
 export type AuthStackParamList = {
@@ -22,7 +23,7 @@ export const AuthNavigator: FC = () => (
     <Stack.Screen 
       name={AuthScreens.SignupScreen}
       component={SignupScreen} 
-      options={{ presentation: 'modal', gestureEnabled: false, }}
+      options={{ gestureEnabled: false, }}
     />
   </Stack.Navigator>
 );

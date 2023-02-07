@@ -13,6 +13,7 @@ import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import useNavigationTransition from '../../hooks/useNavigationTransition';
 
 import styles from './styles';
+import { AuthScreens } from '../../types';
 
 type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
 
@@ -25,7 +26,7 @@ const LoginScreen: FC = () => {
   const [loading, setLoading] = useState(false);
   const passwordInput = useRef<TextInput>(null!);
 
-  const { NavigationTransition, navigation } = useNavigationTransition();
+  const { NavigationTransition, navigate } = useNavigationTransition();
 
   const onEmailPasswordLogin = async (values: IFormProps) => {
     try {
@@ -45,7 +46,7 @@ const LoginScreen: FC = () => {
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView behavior={'padding'} style={styles.bottomHalfContainer}>
         <NavigationTransition>
-          <Text style={styles.subtitleText}>{'Login'}</Text>
+          <Text style={styles.subtitleText}>{'Log In'}</Text>
           <Text style={styles.descriptionText}>{'Welcome back to the Social experience.'}</Text>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordLogin}>
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -86,15 +87,17 @@ const LoginScreen: FC = () => {
         </NavigationTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
-        <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
-        <PressableText
-          label={'Sign up'}
-          fontSize={16}
-          color={Color.teal}
-          onPress={() => navigation.navigate('SignupScreen')}
-          style={{ alignItems: 'center', paddingVertical: 20 }}
-          bold
-        />
+        <NavigationTransition>
+          <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
+          <PressableText
+            label={'Sign up'}
+            fontSize={16}
+            color={Color.teal}
+            onPress={() => navigate(AuthScreens.SignupScreen)}
+            style={{ alignItems: 'center', paddingVertical: 20 }}
+            bold
+          />
+        </NavigationTransition>
       </View>
     </AuthRootView>
   );

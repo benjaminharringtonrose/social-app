@@ -13,6 +13,7 @@ import { LoadingScreen } from '../screens';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
+  animation: 'none'
 }
 
 export type RootStackParamList = {
@@ -30,7 +31,7 @@ export const RootNavigator: FC = () => {
   return (
     <Stack.Navigator screenOptions={navigatorScreenOptions}>
       {state === AuthEnum.Authenticated ? (
-        <Stack.Screen name={RootScreens.BottomTabNavigator} component={BottomTabNavigator} options={{ animation: 'fade' }} />
+        <Stack.Screen name={RootScreens.BottomTabNavigator} component={BottomTabNavigator} />
       ) : state === AuthEnum.Unauthenticated ? (
         <Stack.Screen name={RootScreens.AuthNavigator} component={AuthNavigator} />
       ) : (
