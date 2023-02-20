@@ -1,5 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useRef, useState } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -9,13 +7,10 @@ import { Formik } from 'formik';
 
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
-import { AuthStackParamList } from '../../navigation/AuthNavigator';
-import useNavigationTransition from '../../hooks/useNavigationTransition';
-
-import styles from './styles';
+import { useNavigationTransition } from '../../hooks';
 import { AuthScreens } from '../../types';
 
-type TNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'LoginScreen'>;
+import styles from './styles';
 
 interface IFormProps {
   email: string;

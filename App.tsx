@@ -8,6 +8,10 @@ import { RecoilRoot } from 'recoil';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { Listeners } from './src/components';
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core and will be removed in a future release'])
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.otf'),

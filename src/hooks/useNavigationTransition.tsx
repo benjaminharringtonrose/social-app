@@ -16,7 +16,7 @@ type Screens = RootScreens | BottomTabScreens | AuthScreens;
 
 type TNavigationProp = NativeStackNavigationProp<ParamListBase, Screens>;
 
-const useNavigationTransition = () => {
+export const useNavigationTransition = () => {
   const navigation = useNavigation<TNavigationProp>();
   const opac = useRef(new Animated.Value(0));
 
@@ -57,5 +57,3 @@ const useNavigationTransition = () => {
 
   return { navigate, NavigationTransition };
 };
-
-export default useNavigationTransition;
