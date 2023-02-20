@@ -10,7 +10,7 @@ import { IContent } from '../../types';
 const HomeScreen: FC = () => {
   const [refreshing, setRefreshing] = useState(false);
 
-  const opacity = useOnFocusFadeIn();
+  const { FadeIn, animatedStyle } = useOnFocusFadeIn();
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -34,12 +34,12 @@ const HomeScreen: FC = () => {
 
   return (
     <RootView>
-      <Reanimated.View style={opacity}>
+      <FadeIn animatedStyle={animatedStyle}>
         <FlatList
           contentContainerStyle={{ paddingVertical: 50 }}
           data={Mock.feedData}
           renderItem={renderItem}
-          ItemSeparatorComponent={ItemSeparatorComponent}
+          ItemSeparatorComponent={ItemSeparator}
           refreshControl={
             <RefreshControl 
               refreshing={refreshing} 
@@ -49,12 +49,11 @@ const HomeScreen: FC = () => {
             />
           }
         />
-      </Reanimated.View>
-
+      </FadeIn>
     </RootView>
   );
 };
 
 export default HomeScreen;
 
-const ItemSeparatorComponent = () => <View style={{ height: Size.gutter }} />
+const ItemSeparator = () => <View style={{ height: Size.gutter }} />

@@ -1,10 +1,23 @@
+
+import { FC, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native"
-import { useCallback } from "react";
-import { AnimatedStyleProp, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
+import Reanimated, { AnimatedStyleProp, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
+
+interface IProps {
+  children: JSX.Element[] | JSX.Element | null;
+  animatedStyle: AnimatedStyleProp<{ opacity: number }>
+}
+
+const FadeIn: FC<IProps> = ({children, animatedStyle}) => {
+  return (
+    <Reanimated.View style={animatedStyle}>
+      {children}
+    </Reanimated.View>
+  )
+}
 
 
-
-export const useOnFocusFadeIn = (): AnimatedStyleProp<{ opacity: number }> => {
+export const useOnFocusFadeIn = () => {
   const opacity = useSharedValue(0);
 
   useFocusEffect(useCallback(() => {
@@ -14,9 +27,12 @@ export const useOnFocusFadeIn = (): AnimatedStyleProp<{ opacity: number }> => {
     }
   }, []));
 
-  const opacityAnimStyle = useAnimatedStyle(() => ({
+  const animatedStyle = useAnimatedStyle(() => ({
     opacity: withTiming(opacity.value),
   }));
 
-  return opacityAnimStyle;
+  return {
+    animatedStyle,
+    FadeIn
+  };
 }
