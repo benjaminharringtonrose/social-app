@@ -2,28 +2,31 @@ import React, { FC, useState } from 'react';
 import { FlatList, ListRenderItemInfo, RefreshControl, View } from 'react-native';
 
 import { ContentCard, RootView } from '../../components';
+
+import { useOnFocusFadeIn, useMockRefresh, useNavigationTransition } from '../../hooks';
 import { Size, Mock, Color } from '../../constants';
-import { useOnFocusFadeIn, useMockRefresh } from '../../hooks';
+
 import { IContent } from '../../types';
 
 const HomeScreen: FC = () => {
+  const { navigate, NavigationTransition } = useNavigationTransition();
 
   const { FadeIn, animatedStyle } = useOnFocusFadeIn();
   const { onRefresh, refreshing } = useMockRefresh();
 
 
   const renderItem = ({ item }: ListRenderItemInfo<IContent>) => (
-      <ContentCard 
-        id={item.id} 
-        avatarUrl={item.avatarUrl} 
-        name={item.name} 
-        timestamp={item.timestamp} 
-        caption={item.caption}
-        content={item.content}
-        likes={item.likes}
-        comments={item.comments}
-      />
-    );
+    <ContentCard
+      id={item.id}
+      avatarUrl={item.avatarUrl}
+      name={item.name}
+      timestamp={item.timestamp}
+      caption={item.caption}
+      content={item.content}
+      likes={item.likes}
+      comments={item.comments}
+    />
+  );
 
   return (
     <RootView>
@@ -49,4 +52,4 @@ const HomeScreen: FC = () => {
 
 export default HomeScreen;
 
-const ItemSeparator = () => <View style={{ height: Size.gutter }} />
+const ItemSeparator = () => <View style={{ height: Size.gutter }} />;

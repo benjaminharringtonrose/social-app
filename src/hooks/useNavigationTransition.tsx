@@ -21,6 +21,7 @@ export const useNavigationTransition = () => {
   const opac = useRef(new Animated.Value(0));
 
   useFocusEffect(() => {
+    opac.current.setValue(0);
     Animated.timing(opac.current, {
       toValue: 1,
       duration: 250,
@@ -43,7 +44,9 @@ export const useNavigationTransition = () => {
   const NavigationTransition: React.FC<INavigationTransition> = React.useCallback(({ children, style }) => {
     if (Array.isArray(children)) {
       const ReactNodeMap = children.map((element, index) => (
-        <Animated.View key={index} style={{ ...style, opacity: opac.current, transform: [{ scale: opac.current }] }}>{element}</Animated.View>
+        <Animated.View key={index.toString()} style={{ ...style, opacity: opac.current, transform: [{ scale: opac.current }] }}>
+          {element}
+        </Animated.View>
       ));
       return <>{ReactNodeMap}</>;
     }

@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { HomeScreen, MessagesScreen, NotificationsScreen, PostScreen, SettingsScreen } from '../screens';
@@ -10,15 +10,10 @@ import { BottomTabScreens } from '../types';
 
 const navigatorScreenOptions: BottomTabNavigationOptions = {
   headerShown: true,
-  headerBackground: () => 
-    <BlurView 
-      tint="dark" 
-      intensity={50} 
-      style={StyleSheet.absoluteFill}
-    />,
+  headerBackground: () => <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill} />,
   headerTitleStyle: { color: Color.white, fontFamily: 'Montserrat-Bold' },
   headerTransparent: true,
-}
+};
 
 export type BottomTabParamList = {
   HomeScreen: undefined;
@@ -30,12 +25,14 @@ export type BottomTabParamList = {
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-export const BottomTabNavigator: FC = () => (
-  <Tab.Navigator screenOptions={navigatorScreenOptions} tabBar={(props) => <BottomTabBar {...props} />}>
-    <Tab.Screen name={BottomTabScreens.HomeScreen} component={HomeScreen} options={{ title: 'Feed' }} />
-    <Tab.Screen name={BottomTabScreens.MessagesScreen} component={MessagesScreen} options={{ title: 'Messages' }} />
-    <Tab.Screen name={BottomTabScreens.PostScreen} component={PostScreen} options={{ title: 'Post' }} />
-    <Tab.Screen name={BottomTabScreens.NotificationScreen} component={NotificationsScreen} options={{ title: 'Notifications' }} />
-    <Tab.Screen name={BottomTabScreens.SettingsScreen} component={SettingsScreen} options={{ title: 'Settings' }} />
-  </Tab.Navigator>
-);
+export const BottomTabNavigator: FC = () => {
+  return (
+    <Tab.Navigator screenOptions={navigatorScreenOptions} tabBar={(props) => <BottomTabBar {...props} />}>
+      <Tab.Screen name={BottomTabScreens.HomeScreen} component={HomeScreen} options={{ title: 'Feed' }} />
+      <Tab.Screen name={BottomTabScreens.MessagesScreen} component={MessagesScreen} options={{ title: 'Messages' }} />
+      <Tab.Screen name={BottomTabScreens.PostScreen} component={PostScreen} options={{ title: 'Post' }} />
+      <Tab.Screen name={BottomTabScreens.NotificationScreen} component={NotificationsScreen} options={{ title: 'Notifications' }} />
+      <Tab.Screen name={BottomTabScreens.SettingsScreen} component={SettingsScreen} options={{ title: 'Settings' }} />
+    </Tab.Navigator>
+  );
+};
