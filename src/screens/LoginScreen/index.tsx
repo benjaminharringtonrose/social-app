@@ -7,33 +7,18 @@ import { Formik } from 'formik';
 
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
-import { useNavigationTransition } from '../../hooks';
-import { AuthScreens } from '../../types';
+import { useAuth, useNavigationTransition } from '../../hooks';
+import { AuthScreens, ILoginFormProps } from '../../types';
 
 import styles from './styles';
 
-interface IFormProps {
-  email: string;
-  password: string;
-}
+
 
 const LoginScreen: FC = () => {
-  const [loading, setLoading] = useState(false);
   const passwordInput = useRef<TextInput>(null!);
 
+  const { loadingLogin, onEmailPasswordLogin } = useAuth();
   const { NavigationTransition, navigate } = useNavigationTransition();
-
-  const onEmailPasswordLogin = async (values: IFormProps) => {
-    try {
-      setLoading(true);
-      const auth = getAuth();
-      await signInWithEmailAndPassword(auth, values.email, values.password);
-      setLoading(false);
-    } catch (e) {
-      console.warn(e);
-      setLoading(false);
-    }
-  };
 
   return (
     <AuthRootView backgroundTitle={'Social'}>
@@ -69,7 +54,7 @@ const LoginScreen: FC = () => {
                   LeadingIcon={<Ionicons name={'lock-closed-outline'} size={24} color={Color.grey} />}
                   textInputProps={{ secureTextEntry: true, returnKeyType: 'go' }}
                 />
-                <Button label={'LOGIN'} onPress={handleSubmit} loading={loading} />
+                <Button label={'LOGIN'} onPress={handleSubmit} loading={loadingLogin} />
               </>
             )}
           </Formik>

@@ -33,3 +33,13 @@ export enum BottomTabScreens {
   NotificationScreen = "NotificationsScreen",
   SettingsScreen = "SettingsScreen",
 }
+
+export interface ILoginFormProps {
+  email: string;
+  password: string;
+}
+
+export interface ISignUpFormProps {
+  email: string;
+  password: string;
+}

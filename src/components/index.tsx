@@ -3,6 +3,7 @@ export { default as BottomTabBar } from './BottomTabBar';
 export { default as Button } from './Button';
 export { default as ContentCard } from './ContentCard';
 export { default as Input } from './Input';
+export { default as ItemSeparator } from './ItemSeparator';
 export { default as Listeners } from './Listeners';
 export { default as PressableSocial } from './PressableSocial';
 export { default as PressableText } from './PressableText';

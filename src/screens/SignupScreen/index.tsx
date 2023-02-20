@@ -8,35 +8,18 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { AuthRootView, Input, Button, PressableText } from '../../components';
 import { Color } from '../../constants';
-import { useNavigationTransition } from '../../hooks';
-import { AuthScreens } from '../../types';
+import { useAuth, useNavigationTransition } from '../../hooks';
+import { AuthScreens, ISignUpFormProps } from '../../types';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
 
-interface IFormProps {
-  email: string;
-  password: string;
-}
-
 const SignupScreen: FC = () => {
-  const [loading, setLoading] = useState(false);
   const passwordInput = useRef<TextInput>(null!);
 
+  const { onEmailPasswordSignup, loadingSignUp } = useAuth();
   const { NavigationTransition, navigate } = useNavigationTransition();
-
-  const onEmailPasswordSignup = async (values: IFormProps) => {
-    try {
-      setLoading(true);
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
-    } catch (e) {
-      console.warn(e);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <AuthRootView backgroundTitle={'Social'}>
@@ -72,7 +55,7 @@ const SignupScreen: FC = () => {
                   LeadingIcon={<Ionicons name={'lock-closed-outline'} size={24} color={Color.grey} />}
                   textInputProps={{ secureTextEntry: true, returnKeyType: 'go' }}
                 />
-                <Button label={'LOGIN'} onPress={handleSubmit} loading={loading} />
+                <Button label={'SIGN UP'} onPress={handleSubmit} loading={loadingSignUp} />
               </>
             )}
           </Formik>

@@ -1,23 +1,23 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { getAuth, signOut } from "firebase/auth/react-native";
 
 import { RootView, SettingRow } from '../../components';
 import { Color, Font, Size } from '../../constants';
+import { useAuth, useOnFocusFadeIn } from '../../hooks';
 
-import styles from './styles';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BottomTabParamList } from '../../navigation/BottomTabNavigator';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../../api';
-import { useOnFocusFadeIn } from '../../hooks';
+
+import styles from './styles';
 
 type TNavigationProp = NativeStackNavigationProp<BottomTabParamList, 'SettingsScreen'>;
 
 const SettingsScreen: FC = () => {
   const [pushEnabled, setPushEnabled] = useState(false);
 
+  const { onSignout } = useAuth();
   const { FadeIn, animatedStyle } = useOnFocusFadeIn();
   const navigation = useNavigation<TNavigationProp>();
 
@@ -30,17 +30,6 @@ const SettingsScreen: FC = () => {
       )      
     });
   }, []);
-
-  const onSignout = async () => {
-    try {
-      await signOut(auth);
-    } catch(e) {
-      console.warn(e);
-    }
-    
-  };
-
-
 
   return (
     <RootView>
