@@ -29,11 +29,7 @@ export const useNavigationTransition = () => {
     }).start();
   });
 
-  // ParamList type doesn't properly type possible parameters when using this function
-  // @Benji how do I fix this??? Let's talk, a generic needs to be set where the navigation transition hook is used and imported above
-  // But I don't know how to do that
   const navigate = (screen: Screens, params?: ParamList) => {
-    // Start animations, wait for them to end
     Animated.timing(opac.current, {
       toValue: 0,
       duration: 250,
@@ -46,8 +42,8 @@ export const useNavigationTransition = () => {
 
   const NavigationTransition: React.FC<INavigationTransition> = React.useCallback(({ children, style }) => {
     if (Array.isArray(children)) {
-      const ReactNodeMap = children.map((element) => (
-        <Animated.View style={{ ...style, opacity: opac.current, transform: [{ scale: opac.current }] }}>{element}</Animated.View>
+      const ReactNodeMap = children.map((element, index) => (
+        <Animated.View key={index} style={{ ...style, opacity: opac.current, transform: [{ scale: opac.current }] }}>{element}</Animated.View>
       ));
       return <>{ReactNodeMap}</>;
     }
