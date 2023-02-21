@@ -6,6 +6,7 @@ import { Color, Size } from '../../constants';
 
 import styles from './styles';
 import { IContent } from '../../types';
+import Avatar from '../Avatar';
 
 const ContentCard: FC<IContent> = ({
   avatarUrl,
@@ -20,7 +21,7 @@ const ContentCard: FC<IContent> = ({
     <View style={styles.rootContainer}>
       {/* TOP ROW */}
       <View style={styles.topRowContainer}>
-        <Image style={styles.avatarPlaceholder} source={{ uri: avatarUrl }} />
+        <Avatar source={{ uri: avatarUrl }}  />
         <View style={styles.topRowTextContainer}>
           <Text style={styles.text}>{name}</Text>
           <Text style={styles.text}>{timestamp}</Text>

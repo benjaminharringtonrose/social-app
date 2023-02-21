@@ -39,5 +39,31 @@ export const Mock = {
       likes: 54,
       comments: 12,
     },
+  ],
+  messageThreadData: [
+    {
+      id: '0',
+      avatarUrl: 'https://picsum.photos/id/111/200/300',
+      name: 'John Smith',
+      timestamp: '2 mins ago',
+    },
+    {
+      id: '1',
+      avatarUrl: 'https://picsum.photos/id/222/200/300',
+      name: 'Julie Alexandra',
+      timestamp: '12 mins ago',
+    },
+    {
+      id: '2',
+      avatarUrl: 'https://picsum.photos/id/331/200/300',
+      name: 'Robert Wilkinson',
+      timestamp: '13 mins ago',
+    },
+    {
+      id: '3',
+      avatarUrl: 'https://picsum.photos/id/444/200/300',
+      name: 'Duante Williams',
+      timestamp: '36 mins ago',
+    }
   ]
 };

@@ -31,6 +31,7 @@ const HomeScreen: FC = () => {
       <FadeIn animatedStyle={animatedStyle}>
         <FlatList
           contentContainerStyle={styles.flatListContentContainer}
+          keyExtractor={(item) => item.id}
           data={Mock.feedData}
           renderItem={renderItem}
           ItemSeparatorComponent={ItemSeparator}

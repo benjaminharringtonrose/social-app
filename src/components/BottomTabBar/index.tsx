@@ -52,10 +52,8 @@ const BottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => 
                 merge: true,
               });
             }
-            InteractionManager.runAfterInteractions(() => {
-              indicatorOffset.value = dimensions[idx].x;
-              indicatorWidth.value = dimensions[idx].width;
-            });
+            indicatorOffset.value = dimensions[idx].x;
+            indicatorWidth.value = dimensions[idx].width;
           };
 
           const onLayout = (e: LayoutChangeEvent) => {

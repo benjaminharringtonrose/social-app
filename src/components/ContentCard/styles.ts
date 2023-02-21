@@ -13,13 +13,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row', 
       padding: Size.gutter 
     },
-    avatarPlaceholder: { 
-      width: 50, 
-      height: 50, 
-      borderRadius: 25, 
-      backgroundColor: Color.grey, 
-      marginRight: Size.gutter,
-    },
     topRowTextContainer: {
       flex: 1,
       justifyContent: 'center',
