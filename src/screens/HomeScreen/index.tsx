@@ -9,7 +9,7 @@ import { IContent } from '../../types';
 import styles from './styles';
 
 const HomeScreen: FC = () => {
-
+  
   const { FadeIn, animatedStyle } = useOnFocusFadeIn();
   const { onRefresh, refreshing } = useMockRefresh();
 
