@@ -1,27 +1,19 @@
-import React, { FC, useEffect } from 'react';
-
-import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
-import { NavigatorScreenParams } from "@react-navigation/native";
-
-import { BottomTabNavigator, BottomTabParamList } from './BottomTabNavigator';
-import { AuthNavigator, AuthStackParamList } from './AuthNavigator';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { authStateSelector, userSelector } from '../store/auth';
-import { AuthEnum, RootScreens } from '../types';
+import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
+
 import { LoadingScreen } from '../screens';
+import { authStateSelector } from '../store/auth';
+import { AuthEnum } from '../types';
+
+import { AuthNavigator } from './AuthNavigator';
+import { BottomTabNavigator,  } from './BottomTabNavigator';
+import { RootScreens, RootStackParamList } from './types';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
   animation: 'none'
 }
-
-export type RootStackParamList = {
-  BottomTabNavigator: NavigatorScreenParams<BottomTabParamList>;
-  AuthNavigator: NavigatorScreenParams<AuthStackParamList>;
-  LoadingScreen: undefined;
-  LoginScreen: undefined;
-};
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

@@ -1,16 +1,13 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Formik } from 'formik';
 import { StatusBar } from 'expo-status-bar';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { AuthRootView, Input, Button, PressableText } from '../../components';
 import { Color } from '../../constants';
 import { useAuth, useNavigationTransition } from '../../hooks';
-import { AuthScreens, ISignUpFormProps } from '../../types';
-import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { AuthScreens } from '../../navigation/types';
 import { isIOS } from '../../utils';
 
 import styles from './styles';

@@ -1,19 +1,14 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
-import { LoginScreen } from '../screens';
-import SignupScreen from '../screens/SignupScreen';
-import { AuthScreens } from '../types';
+import { LoginScreen, SignupScreen } from '../screens';
+
+import { AuthScreens, AuthStackParamList } from './types';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
   animation: 'none',
 }
-
-export type AuthStackParamList = {
-  LoginScreen: undefined;
-  SignupScreen: undefined;
-};
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 

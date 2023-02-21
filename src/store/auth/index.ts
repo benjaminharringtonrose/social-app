@@ -1,5 +1,5 @@
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { useEffect } from "react";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { atom, selector, useSetRecoilState } from "recoil";
 
 import { AuthEnum } from "../../types";

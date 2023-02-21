@@ -1,14 +1,13 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StatusBar } from 'expo-status-bar';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth/react-native';
 import { Formik } from 'formik';
 
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
 import { useAuth, useNavigationTransition } from '../../hooks';
-import { AuthScreens, ILoginFormProps } from '../../types';
+import { AuthScreens } from '../../navigation/types';
 
 import styles from './styles';
 

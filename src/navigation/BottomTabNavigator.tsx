@@ -1,12 +1,19 @@
-import React, {FC} from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import { HomeScreen, MessagesScreen, NotificationsScreen, PostScreen, SettingsScreen } from '../screens';
-import { BottomTabBar } from '../components';
 import { BlurView } from 'expo-blur';
+
+import { BottomTabBar } from '../components';
 import { Color } from '../constants';
-import { BottomTabScreens } from '../types';
+import { BottomTabParamList, BottomTabScreens } from '../navigation/types';
+import { 
+  HomeScreen, 
+  MessagesScreen, 
+  NotificationsScreen, 
+  PostScreen, 
+  SettingsScreen 
+} from '../screens';
+
 
 const navigatorScreenOptions: BottomTabNavigationOptions = {
   headerShown: true,
@@ -18,14 +25,6 @@ const navigatorScreenOptions: BottomTabNavigationOptions = {
     />,
   headerTitleStyle: { color: Color.white, fontFamily: 'Montserrat-Bold' },
   headerTransparent: true,
-}
-
-export type BottomTabParamList = {
-  HomeScreen: undefined;
-  MessagesScreen: undefined;
-  PostScreen: undefined;
-  NotificationsScreen: undefined;
-  SettingsScreen: undefined;
 };
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();

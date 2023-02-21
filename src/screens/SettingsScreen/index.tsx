@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { RootView, SettingRow } from '../../components';
+import { BottomTabParamList } from '../../navigation/types';
+import { PressableText, RootView, SettingRow } from '../../components';
 import { Color, Font, Size } from '../../constants';
 import { useAuth, useOnFocusFadeIn } from '../../hooks';
-
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BottomTabParamList } from '../../navigation/BottomTabNavigator';
-import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
@@ -19,14 +18,19 @@ const SettingsScreen: FC = () => {
 
   const { onSignout } = useAuth();
   const { FadeIn, animatedStyle } = useOnFocusFadeIn();
+
   const navigation = useNavigation<TNavigationProp>();
 
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={onSignout}>
-          <Text style={{ color: Color.white, fontFamily: Font.family.montserratMedium, paddingRight: Size.gutter }}>{"Signout"}</Text>
-        </TouchableOpacity>
+        <PressableText 
+          onPress={onSignout} 
+          label={"Signout"} 
+          fontSize={14} 
+          color={Color.white} 
+          style={{ marginRight: Size.gutter }}
+        />
       )      
     });
   }, []);
