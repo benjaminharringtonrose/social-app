@@ -10,9 +10,6 @@ import { useAuth, useNavigationTransition } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
 
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
-
-
 
 const LoginScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
@@ -58,11 +55,33 @@ const LoginScreen: FC = () => {
               </>
             )}
           </Formik>
-          <PressableText label={'Forgot Password?'} fontSize={16} color={Color.teal} onPress={() => {}} style={{ alignItems: 'center' }} />
+          <PressableText 
+            label={'Forgot Password?'} 
+            fontSize={16} 
+            color={Color.teal} 
+            onPress={() => {}} 
+            style={{ alignItems: 'center' }} 
+          />
           <View style={styles.socialsContainer}>
-            <PressableSocial name={'facebook-square'} size={40} color={Color.teal} onPress={() => {}} />
-            <PressableSocial name={'apple'} size={40} color={Color.teal} onPress={() => {}} style={{ marginHorizontal: 30 }} />
-            <PressableSocial name={'google'} size={40} color={Color.teal} onPress={() => {}} />
+            <PressableSocial 
+              name={'facebook-square'} 
+              size={40} 
+              color={Color.teal} 
+              onPress={() => {}} 
+            />
+            <PressableSocial 
+              name={'apple'} 
+              size={40} 
+              color={Color.teal} 
+              onPress={() => {}} 
+              style={{ marginHorizontal: 30 }} 
+            />
+            <PressableSocial 
+              name={'google'} 
+              size={40} 
+              color={Color.teal} 
+              onPress={() => {}} 
+            />
           </View>
         </NavigationTransition>
       </KeyboardAvoidingView>
@@ -74,8 +93,7 @@ const LoginScreen: FC = () => {
             fontSize={16}
             color={Color.teal}
             onPress={() => navigate(AuthScreens.SignupScreen)}
-            style={{ alignItems: 'center', paddingVertical: 20 }}
-            bold
+            style={{ alignItems: 'center' }}
           />
         </NavigationTransition>
       </View>

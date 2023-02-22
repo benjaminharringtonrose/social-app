@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: 60, 
     height: 60, 
     backgroundColor: Color.lightGrey, 
-    borderRadius: 10
+    borderRadius: 10,
   },
   socialsContainer: {
     flexDirection: "row",

@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Formik } from 'formik';
 import { StatusBar } from 'expo-status-bar';
 
-import { AuthRootView, Input, Button, PressableText } from '../../components';
+import { AuthRootView, Input, Button, PressableText, PressableSocial } from '../../components';
 import { Color } from '../../constants';
 import { useAuth, useNavigationTransition } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
@@ -58,18 +58,38 @@ const SignupScreen: FC = () => {
           </Formik>
         </NavigationTransition>
       </KeyboardAvoidingView>
-      <View style={styles.signupContainer}>
         <NavigationTransition animatedStyle={animatedStyle}>
-          <Text style={styles.accountQText}>{'Already have an account? '}</Text>
-          <PressableText
-            label={'Sign in'}
-            color={Color.teal}
-            fontSize={16}
-            onPress={() => navigate(AuthScreens.LoginScreen)}
-            style={{ paddingVertical: 20 }}
-          />
+          <View style={styles.socialsContainer}>
+              <PressableSocial 
+                name={'facebook-square'} 
+                size={40} 
+                color={Color.teal} 
+                onPress={() => {}} 
+              />
+              <PressableSocial 
+                name={'apple'} 
+                size={40} 
+                color={Color.teal} 
+                onPress={() => {}} 
+                style={{ marginHorizontal: 30 }} 
+              />
+              <PressableSocial 
+                name={'google'} 
+                size={40} 
+                color={Color.teal} 
+                onPress={() => {}} 
+              />
+          </View>
+          <View style={styles.signupContainer}>
+            <Text style={styles.accountQText}>{'Already have an account? '}</Text>
+            <PressableText
+              label={'Sign in'}
+              color={Color.teal}
+              fontSize={16}
+              onPress={() => navigate(AuthScreens.LoginScreen)}
+            />
+          </View>
         </NavigationTransition>
-      </View>
     </AuthRootView>
   );
 };

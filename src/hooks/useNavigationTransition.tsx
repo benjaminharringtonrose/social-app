@@ -34,7 +34,7 @@ export const useNavigationTransition = () => {
 
   const runNavigateOnJS = (screen: Screens, params?: ParamList) => {
     navigation.navigate(screen, params);
-  }
+  };
 
   const navigate = (screen: Screens, params?: ParamList) => {
     opacRef.value = withTiming(0, config);
