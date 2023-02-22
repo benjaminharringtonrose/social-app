@@ -9,7 +9,7 @@ import {
   RootScreens 
 } from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Easing, useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig } from 'react-native-reanimated';
+import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig } from 'react-native-reanimated';
 import { NavigationTransition } from '../components';
 
 type ParamList = AuthStackParamList | RootStackParamList;
@@ -28,22 +28,23 @@ export const useNavigationTransition = () => {
   };
 
   useFocusEffect(() => {
-    opacRef.value = 1;
-    scaleRef.value = 1;
+    opacRef.value = withTiming(1, config);
+    scaleRef.value = withTiming(1, config);
   });
 
   const navigate = (screen: Screens, params?: ParamList) => {
-    opacRef.value = 0;
-    scaleRef.value = 0;
-    setTimeout(() => {
-      navigation.navigate(screen, params);
-    }, 350);
+    opacRef.value = withTiming(0, config);
+    scaleRef.value = withTiming(0, config, (finished) => {
+      if (finished) {
+        runOnJS(navigation.navigate)(screen, params);
+      }
+    });
   };
 
   const animatedStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(opacRef.value, config),
-    transform: [{ scale: withTiming(scaleRef.value, config) }],
-  }), [opacRef.value, scaleRef.value])
+    opacity: opacRef.value,
+    transform: [{ scale: scaleRef.value }],
+  }));
 
 
 
