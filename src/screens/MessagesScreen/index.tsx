@@ -28,11 +28,11 @@ const MessagesScreen: FC = () => {
           data={Mock.messageThreadData}
           renderItem={renderItem}
           refreshControl={
-            <RefreshControl 
-              refreshing={refreshing} 
-              tintColor={Color.white} 
-              progressViewOffset={50} 
-              onRefresh={onRefresh}  
+            <RefreshControl
+              refreshing={refreshing}
+              tintColor={Color.white}
+              progressViewOffset={50}
+              onRefresh={onRefresh}
             />
           }
         />

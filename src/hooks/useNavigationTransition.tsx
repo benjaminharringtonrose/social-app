@@ -1,14 +1,20 @@
-import React, { ReactNode, useRef } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { ParamListBase, useNavigation, useFocusEffect } from '@react-navigation/native';
-import { Animated, Easing, ViewStyle } from 'react-native';
-import { AuthStackParamList } from '../navigation/AuthNavigator';
-import { RootStackParamList } from '../navigation/RootNavigator';
-import { AuthScreens, BottomTabScreens, RootScreens } from '../types';
+import { ViewStyle } from 'react-native';
+import { 
+  AuthStackParamList, 
+  RootStackParamList, 
+  AuthScreens, 
+  BottomTabScreens, 
+  RootScreens 
+} from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import Reanimated, { Easing, runOnJS, runOnUI, useAnimatedStyle, useSharedValue, withDelay, withTiming, WithTimingConfig } from 'react-native-reanimated';
 
 interface INavigationTransition {
   children: ReactNode[] | ReactNode;
   style?: ViewStyle;
+  animatedStyle: any;
 }
 
 type ParamList = AuthStackParamList | RootStackParamList;
@@ -16,43 +22,47 @@ type Screens = RootScreens | BottomTabScreens | AuthScreens;
 
 type TNavigationProp = NativeStackNavigationProp<ParamListBase, Screens>;
 
+const NavigationTransition: React.FC<INavigationTransition> = ({ children, style, animatedStyle  }) => {
+  if (Array.isArray(children)) {
+    const ReactNodeMap = children.map((element, index) => (
+      <Reanimated.View key={index}  style={[style, animatedStyle]}>
+        {element}
+      </Reanimated.View>
+    ));
+    return <>{ReactNodeMap}</>;
+  }
+
+  return <Reanimated.View style={[style, animatedStyle]}>{children}</Reanimated.View>;
+};
+
 export const useNavigationTransition = () => {
   const navigation = useNavigation<TNavigationProp>();
-  const opac = useRef(new Animated.Value(0));
+  const opacRef = useSharedValue(0);
+  const scaleRef = useSharedValue(0);
+
+  const config: WithTimingConfig = {
+    duration: 200,
+  };
 
   useFocusEffect(() => {
-    opac.current.setValue(0);
-    Animated.timing(opac.current, {
-      toValue: 1,
-      duration: 250,
-      useNativeDriver: true,
-      easing: Easing.ease,
-    }).start();
+    opacRef.value = 1;
+    scaleRef.value = 1;
   });
 
   const navigate = (screen: Screens, params?: ParamList) => {
-    Animated.timing(opac.current, {
-      toValue: 0,
-      duration: 250,
-      useNativeDriver: true,
-      easing: Easing.back(1),
-    }).start(() => {
+    opacRef.value = 0;
+    scaleRef.value = 0;
+    setTimeout(() => {
       navigation.navigate(screen, params);
-    });
+    }, 350);
   };
 
-  const NavigationTransition: React.FC<INavigationTransition> = React.useCallback(({ children, style }) => {
-    if (Array.isArray(children)) {
-      const ReactNodeMap = children.map((element, index) => (
-        <Animated.View key={index.toString()} style={{ ...style, opacity: opac.current, transform: [{ scale: opac.current }] }}>
-          {element}
-        </Animated.View>
-      ));
-      return <>{ReactNodeMap}</>;
-    }
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(opacRef.value, config),
+    transform: [{ scale: withTiming(scaleRef.value, config) }],
+  }), [opacRef.value, scaleRef.value])
 
-    return <Animated.View style={{ ...style, opacity: opac.current, transform: [{ scale: opac.current }] }}>{children}</Animated.View>;
-  }, []);
 
-  return { navigate, NavigationTransition };
+
+  return { navigate, NavigationTransition, animatedStyle };
 };

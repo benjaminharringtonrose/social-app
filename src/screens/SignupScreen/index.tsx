@@ -16,14 +16,14 @@ const SignupScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { onEmailPasswordSignup, loadingSignUp } = useAuth();
-  const { NavigationTransition, navigate } = useNavigationTransition();
+  const { NavigationTransition, navigate, animatedStyle } = useNavigationTransition();
 
   return (
     <AuthRootView backgroundTitle={'Social'}>
       <StatusBar style="light" />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'} style={styles.bottomHalfContainer} keyboardVerticalOffset={160}>
-        <NavigationTransition>
+        <NavigationTransition animatedStyle={animatedStyle}>
           <Text style={styles.subtitleText}>{'Sign Up'}</Text>
           <Text style={styles.descriptionText}>{"Choose how you'd like to sign up."}</Text>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordSignup}>
@@ -59,7 +59,7 @@ const SignupScreen: FC = () => {
         </NavigationTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
-        <NavigationTransition>
+        <NavigationTransition animatedStyle={animatedStyle}>
           <Text style={styles.accountQText}>{'Already have an account? '}</Text>
           <PressableText
             label={'Sign in'}

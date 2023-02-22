@@ -10,6 +10,7 @@ import { useAuth, useNavigationTransition } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
 
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -17,14 +18,14 @@ const LoginScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { loadingLogin, onEmailPasswordLogin } = useAuth();
-  const { NavigationTransition, navigate } = useNavigationTransition();
+  const { NavigationTransition, navigate, animatedStyle } = useNavigationTransition();
 
   return (
     <AuthRootView backgroundTitle={'Social'}>
       <StatusBar style={'light'} />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView behavior={'padding'} style={styles.bottomHalfContainer}>
-        <NavigationTransition>
+        <NavigationTransition animatedStyle={animatedStyle}>
           <Text style={styles.subtitleText}>{'Log In'}</Text>
           <Text style={styles.descriptionText}>{'Welcome back to the Social experience.'}</Text>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordLogin}>
@@ -66,7 +67,7 @@ const LoginScreen: FC = () => {
         </NavigationTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
-        <NavigationTransition>
+        <NavigationTransition animatedStyle={animatedStyle}>
           <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
           <PressableText
             label={'Sign up'}
