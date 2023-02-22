@@ -7,6 +7,7 @@ export { default as Input } from './Input';
 export { default as ItemSeparator } from './ItemSeparator';
 export { default as Listeners } from './Listeners';
 export { default as MessageThreadButton } from './MessageThreadButton';
+export { default as NavigationTransition } from './NavigationTransition';
 export { default as PressableSocial } from './PressableSocial';
 export { default as PressableText } from './PressableText';
 export { default as RootView } from './RootView';

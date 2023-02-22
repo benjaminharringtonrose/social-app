@@ -9,31 +9,13 @@ import {
   RootScreens 
 } from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import Reanimated, { Easing, runOnJS, runOnUI, useAnimatedStyle, useSharedValue, withDelay, withTiming, WithTimingConfig } from 'react-native-reanimated';
-
-interface INavigationTransition {
-  children: ReactNode[] | ReactNode;
-  style?: ViewStyle;
-  animatedStyle: any;
-}
+import { Easing, useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig } from 'react-native-reanimated';
+import { NavigationTransition } from '../components';
 
 type ParamList = AuthStackParamList | RootStackParamList;
 type Screens = RootScreens | BottomTabScreens | AuthScreens;
 
 type TNavigationProp = NativeStackNavigationProp<ParamListBase, Screens>;
-
-const NavigationTransition: React.FC<INavigationTransition> = ({ children, style, animatedStyle  }) => {
-  if (Array.isArray(children)) {
-    const ReactNodeMap = children.map((element, index) => (
-      <Reanimated.View key={index}  style={[style, animatedStyle]}>
-        {element}
-      </Reanimated.View>
-    ));
-    return <>{ReactNodeMap}</>;
-  }
-
-  return <Reanimated.View style={[style, animatedStyle]}>{children}</Reanimated.View>;
-};
 
 export const useNavigationTransition = () => {
   const navigation = useNavigation<TNavigationProp>();
@@ -42,6 +24,7 @@ export const useNavigationTransition = () => {
 
   const config: WithTimingConfig = {
     duration: 200,
+    easing: Easing.ease,
   };
 
   useFocusEffect(() => {
