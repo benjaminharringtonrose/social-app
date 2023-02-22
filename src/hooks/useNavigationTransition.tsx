@@ -32,11 +32,15 @@ export const useNavigationTransition = () => {
     scaleRef.value = withTiming(1, config);
   });
 
+  const runNavigateOnJS = (screen: Screens, params?: ParamList) => {
+    navigation.navigate(screen, params);
+  }
+
   const navigate = (screen: Screens, params?: ParamList) => {
     opacRef.value = withTiming(0, config);
     scaleRef.value = withTiming(0, config, (finished) => {
       if (finished) {
-        runOnJS(navigation.navigate)(screen, params);
+        runOnJS(runNavigateOnJS)(screen, params);
       }
     });
   };
