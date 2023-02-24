@@ -61,7 +61,6 @@ export const useAnimatedTransition = ({ animationType, config }: IUseAnimatedTra
   };
 
   const animatedStyle = useAnimatedStyle(() => {
-    'worklet';
     switch(animationType) {
       case 'fadeInFadeOut':
         return {
