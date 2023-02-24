@@ -6,24 +6,30 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AuthRootView, Input, Button, PressableText, PressableSocial } from '../../components';
 import { Color } from '../../constants';
-import { useAuth, useNavigationTransition } from '../../hooks';
+import { useAnimatedTransition, useAuth } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
+import { Easing, WithTimingConfig } from 'react-native-reanimated';
+
+const config: WithTimingConfig = {
+  duration: 200,
+  easing: Easing.ease,
+};
 
 const SignupScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { onEmailPasswordSignup, loadingSignUp } = useAuth();
-  const { NavigationTransition, navigate, animatedStyle } = useNavigationTransition();
+  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition({ animationType: 'shrinkGrow', config });
 
   return (
     <AuthRootView backgroundTitle={'Social'}>
       <StatusBar style="light" />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'} style={styles.bottomHalfContainer} keyboardVerticalOffset={160}>
-        <NavigationTransition animatedStyle={animatedStyle}>
+        <AnimatedTransition animatedStyle={animatedStyle}>
           <Text style={styles.subtitleText}>{'Sign Up'}</Text>
           <Text style={styles.descriptionText}>{"Choose how you'd like to sign up."}</Text>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordSignup}>
@@ -77,10 +83,10 @@ const SignupScreen: FC = () => {
               onPress={() => {}} 
             />
           </View>
-        </NavigationTransition>
+        </AnimatedTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
-        <NavigationTransition animatedStyle={[animatedStyle, { flexDirection: 'row' }]}>
+        <AnimatedTransition animatedStyle={animatedStyle} style={{ flexDirection: 'row' }}>
           <Text style={styles.accountQText}>{'Already have an account? '}</Text>
           <PressableText
             label={'Sign in'}
@@ -88,7 +94,7 @@ const SignupScreen: FC = () => {
             fontSize={16}
             onPress={() => navigate(AuthScreens.LoginScreen)}
           />
-        </NavigationTransition>
+        </AnimatedTransition>
       </View>
     </AuthRootView>
   );

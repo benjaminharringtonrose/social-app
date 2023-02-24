@@ -7,7 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { BottomTabParamList } from '../../navigation/types';
 import { PressableText, RootView, SettingRow } from '../../components';
 import { Color, Font, Size } from '../../constants';
-import { useAuth, useOnFocusFadeIn } from '../../hooks';
+import { useAnimatedTransition, useAuth } from '../../hooks';
 
 import styles from './styles';
 
@@ -17,7 +17,7 @@ const SettingsScreen: FC = () => {
   const [pushEnabled, setPushEnabled] = useState(false);
 
   const { onSignout } = useAuth();
-  const { FadeIn, animatedStyle } = useOnFocusFadeIn();
+  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ animationType: 'fadeInFadeOut' });
 
   const navigation = useNavigation<TNavigationProp>();
 
@@ -37,7 +37,7 @@ const SettingsScreen: FC = () => {
 
   return (
     <RootView>
-      <FadeIn animatedStyle={animatedStyle}>
+      <AnimatedTransition animatedStyle={animatedStyle}>
         <View style={{ marginTop: 50, padding: Size.gutter }}>
           <Text style={styles.sectionText}>{'Account'}</Text>
           <TouchableOpacity onPress={() => {}} style={{ flexDirection: 'row', alignItems: 'center', borderTopWidth: 1, borderBottomWidth: 1, borderColor: Color.gray5, padding: Size.gutter, marginBottom: 20 }}>
@@ -62,7 +62,7 @@ const SettingsScreen: FC = () => {
             onPress={() => setPushEnabled((prevState) => !prevState)}
           />
         </View>
-      </FadeIn>
+      </AnimatedTransition>
     </RootView>
   );
 };

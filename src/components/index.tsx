@@ -1,3 +1,4 @@
+export { default as AnimatedTransition } from './AnimatedTransition';
 export { default as AuthRootView } from './AuthRootView';
 export { default as Avatar } from './Avatar';
 export { default as BottomTabBar } from './BottomTabBar';

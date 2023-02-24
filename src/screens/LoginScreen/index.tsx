@@ -6,23 +6,29 @@ import { Formik } from 'formik';
 
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
-import { useAuth, useNavigationTransition } from '../../hooks';
+import { useAnimatedTransition, useAuth } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
 
 import styles from './styles';
+import { Easing, WithTimingConfig } from 'react-native-reanimated';
+
+const config: WithTimingConfig = {
+  duration: 200,
+  easing: Easing.ease,
+};
 
 const LoginScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { loadingLogin, onEmailPasswordLogin } = useAuth();
-  const { NavigationTransition, navigate, animatedStyle } = useNavigationTransition();
+  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition({ animationType: 'shrinkGrow', config });
 
   return (
     <AuthRootView backgroundTitle={'Social'}>
       <StatusBar style={'light'} />
       <View style={styles.topHalfContainer} />
       <KeyboardAvoidingView behavior={'padding'} style={styles.bottomHalfContainer}>
-        <NavigationTransition animatedStyle={animatedStyle}>
+        <AnimatedTransition animatedStyle={animatedStyle}>
           <Text style={styles.subtitleText}>{'Log In'}</Text>
           <Text style={styles.descriptionText}>{'Welcome back to the Social experience.'}</Text>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={onEmailPasswordLogin}>
@@ -83,10 +89,10 @@ const LoginScreen: FC = () => {
               onPress={() => {}} 
             />
           </View>
-        </NavigationTransition>
+        </AnimatedTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
-        <NavigationTransition animatedStyle={[animatedStyle, { flexDirection: 'row' }]}>
+        <AnimatedTransition animatedStyle={animatedStyle} style={{ flexDirection: 'row' }}>
           <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
           <PressableText
             label={'Sign up'}
@@ -94,7 +100,7 @@ const LoginScreen: FC = () => {
             color={Color.teal}
             onPress={() => navigate(AuthScreens.SignupScreen)}
           />
-        </NavigationTransition>
+        </AnimatedTransition>
       </View>
     </AuthRootView>
   );

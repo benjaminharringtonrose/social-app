@@ -3,14 +3,14 @@ import { FlatList, ListRenderItemInfo, RefreshControl, View } from 'react-native
 
 import { ContentCard, ItemSeparator, RootView } from '../../components';
 import { Mock, Color } from '../../constants';
-import { useOnFocusFadeIn, useMockRefresh } from '../../hooks';
+import { useMockRefresh, useAnimatedTransition } from '../../hooks';
 import { IContent } from '../../types';
 
 import styles from './styles';
 
 const HomeScreen: FC = () => {
   
-  const { FadeIn, animatedStyle } = useOnFocusFadeIn();
+  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ animationType: 'fadeInFadeOut' });
   const { onRefresh, refreshing } = useMockRefresh();
 
   const renderItem = ({ item }: ListRenderItemInfo<IContent>) => (
@@ -28,7 +28,7 @@ const HomeScreen: FC = () => {
 
   return (
     <RootView>
-      <FadeIn animatedStyle={animatedStyle}>
+      <AnimatedTransition animatedStyle={animatedStyle}>
         <FlatList
           contentContainerStyle={styles.flatListContentContainer}
           keyExtractor={(item) => item.id}
@@ -44,7 +44,7 @@ const HomeScreen: FC = () => {
             />
           }
         />
-      </FadeIn>
+      </AnimatedTransition>
     </RootView>
   );
 };
