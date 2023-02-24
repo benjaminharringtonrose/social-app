@@ -21,14 +21,17 @@ export const useAnimatedTransition = ({ animationType, config }: IUseAnimatedTra
     switch(animationType) {
       case 'fadeInFadeOut':
         opacity.value = withTiming(1);
+        break;
       case 'shrinkGrow':
         opacity.value = withTiming(1, config);
         scale.value = withTiming(1, config);
+        break;
     }
     return () => {
       switch(animationType) {
         case 'fadeInFadeOut':
           opacity.value = withTiming(0);
+          break;
         case 'shrinkGrow':
         default:
           return;
@@ -42,12 +45,19 @@ export const useAnimatedTransition = ({ animationType, config }: IUseAnimatedTra
   };
 
   const navigate = (screen: any, params?: any) => {
-    opacity.value = withTiming(0, config);
-    scale.value = withTiming(0, config, (finished) => {
-      if (finished) {
-        runOnJS(runNavigateOnJS)(screen, params);
-      }
-    });
+    switch(animationType) {
+      case 'shrinkGrow':
+        opacity.value = withTiming(0, config);
+        scale.value = withTiming(0, config, (finished) => {
+          if (finished) {
+            runOnJS(runNavigateOnJS)(screen, params);
+          }
+        });
+        break;
+      default:
+        return;
+    }
+
   };
 
   const animatedStyle = useAnimatedStyle(() => {
