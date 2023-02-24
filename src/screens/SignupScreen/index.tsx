@@ -12,17 +12,23 @@ import { isIOS } from '../../utils';
 
 import styles from './styles';
 import { Easing, WithTimingConfig } from 'react-native-reanimated';
+import { IUseAnimatedTransitionConfig } from '../../hooks/useAnimatedTransition';
 
 const config: WithTimingConfig = {
   duration: 200,
   easing: Easing.ease,
 };
 
+const animatedTranisitionConfig: IUseAnimatedTransitionConfig = { 
+  animationType: 'shrinkGrow',
+  config,
+};
+
 const SignupScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { onEmailPasswordSignup, loadingSignUp } = useAuth();
-  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition({ animationType: 'shrinkGrow', config });
+  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition(animatedTranisitionConfig);
 
   return (
     <AuthRootView backgroundTitle={'Social'}>

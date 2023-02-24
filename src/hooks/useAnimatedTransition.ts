@@ -7,7 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type TNavigationProp = NativeStackNavigationProp<any, any>;
 
-interface IUseAnimatedTransitionConfig {
+export interface IUseAnimatedTransitionConfig {
   animationType: 'fadeInFadeOut' | 'shrinkGrow'
   config?: WithTimingConfig;
 }
