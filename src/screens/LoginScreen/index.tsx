@@ -64,7 +64,11 @@ const LoginScreen: FC = () => {
                   value={values.password}
                   placeholder={'PASSWORD'}
                   LeadingIcon={<Ionicons name={'lock-closed-outline'} size={24} color={Color.grey} />}
-                  textInputProps={{ secureTextEntry: true, returnKeyType: 'go' }}
+                  textInputProps={{ 
+                    secureTextEntry: true, 
+                    returnKeyType: 'go',
+                    onSubmitEditing: () => onEmailPasswordLogin(values),
+                  }}
                 />
                 <Button label={'LOGIN'} onPress={handleSubmit} loading={loadingLogin} />
               </>
