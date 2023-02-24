@@ -86,14 +86,13 @@ const LoginScreen: FC = () => {
         </NavigationTransition>
       </KeyboardAvoidingView>
       <View style={styles.signupContainer}>
-        <NavigationTransition animatedStyle={animatedStyle}>
+        <NavigationTransition animatedStyle={[animatedStyle, { flexDirection: 'row' }]}>
           <Text style={styles.accountQText}>{"Don't have an account? "}</Text>
           <PressableText
             label={'Sign up'}
             fontSize={16}
             color={Color.teal}
             onPress={() => navigate(AuthScreens.SignupScreen)}
-            style={{ alignItems: 'center' }}
           />
         </NavigationTransition>
       </View>

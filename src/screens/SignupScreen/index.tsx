@@ -56,40 +56,40 @@ const SignupScreen: FC = () => {
               </>
             )}
           </Formik>
-        </NavigationTransition>
-      </KeyboardAvoidingView>
-        <NavigationTransition animatedStyle={animatedStyle}>
           <View style={styles.socialsContainer}>
-              <PressableSocial 
-                name={'facebook-square'} 
-                size={40} 
-                color={Color.teal} 
-                onPress={() => {}} 
-              />
-              <PressableSocial 
-                name={'apple'} 
-                size={40} 
-                color={Color.teal} 
-                onPress={() => {}} 
-                style={{ marginHorizontal: 30 }} 
-              />
-              <PressableSocial 
-                name={'google'} 
-                size={40} 
-                color={Color.teal} 
-                onPress={() => {}} 
-              />
-          </View>
-          <View style={styles.signupContainer}>
-            <Text style={styles.accountQText}>{'Already have an account? '}</Text>
-            <PressableText
-              label={'Sign in'}
-              color={Color.teal}
-              fontSize={16}
-              onPress={() => navigate(AuthScreens.LoginScreen)}
+            <PressableSocial 
+              name={'facebook-square'} 
+              size={40} 
+              color={Color.teal} 
+              onPress={() => {}} 
+            />
+            <PressableSocial 
+              name={'apple'} 
+              size={40} 
+              color={Color.teal} 
+              onPress={() => {}} 
+              style={{ marginHorizontal: 30 }} 
+            />
+            <PressableSocial 
+              name={'google'} 
+              size={40} 
+              color={Color.teal} 
+              onPress={() => {}} 
             />
           </View>
         </NavigationTransition>
+      </KeyboardAvoidingView>
+      <View style={styles.signupContainer}>
+        <NavigationTransition animatedStyle={[animatedStyle, { flexDirection: 'row' }]}>
+          <Text style={styles.accountQText}>{'Already have an account? '}</Text>
+          <PressableText
+            label={'Sign in'}
+            color={Color.teal}
+            fontSize={16}
+            onPress={() => navigate(AuthScreens.LoginScreen)}
+          />
+        </NavigationTransition>
+      </View>
     </AuthRootView>
   );
 };

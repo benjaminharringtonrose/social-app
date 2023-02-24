@@ -19,26 +19,26 @@ type TNavigationProp = NativeStackNavigationProp<ParamListBase, Screens>;
 
 export const useNavigationTransition = () => {
   const navigation = useNavigation<TNavigationProp>();
-  const opacRef = useSharedValue(0);
-  const scaleRef = useSharedValue(0);
+  const opacity = useSharedValue(0);
+  const scale = useSharedValue(0);
 
   const config: WithTimingConfig = {
     duration: 200,
     easing: Easing.ease,
   };
 
-  useFocusEffect(() => {
-    opacRef.value = withTiming(1, config);
-    scaleRef.value = withTiming(1, config);
-  });
+  useFocusEffect(useCallback(() => {
+    opacity.value = withTiming(1, config);
+    scale.value = withTiming(1, config);
+  }, []));
 
   const runNavigateOnJS = (screen: Screens, params?: ParamList) => {
     navigation.navigate(screen, params);
   };
 
   const navigate = (screen: Screens, params?: ParamList) => {
-    opacRef.value = withTiming(0, config);
-    scaleRef.value = withTiming(0, config, (finished) => {
+    opacity.value = withTiming(0, config);
+    scale.value = withTiming(0, config, (finished) => {
       if (finished) {
         runOnJS(runNavigateOnJS)(screen, params);
       }
@@ -46,8 +46,8 @@ export const useNavigationTransition = () => {
   };
 
   const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacRef.value,
-    transform: [{ scale: scaleRef.value }],
+    opacity: opacity.value,
+    transform: [{ scale: scale.value }],
   }));
 
 
