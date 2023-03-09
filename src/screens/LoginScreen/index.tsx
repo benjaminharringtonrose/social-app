@@ -7,11 +7,10 @@ import { Formik } from 'formik';
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
 import { AnimationType, useAnimatedTransition, useAuth } from '../../hooks';
-import { AuthScreens } from '../../navigation/types';
 
 import styles from './styles';
 import { Easing, WithTimingConfig } from 'react-native-reanimated';
-import { IUseAnimatedTransitionConfig } from '../../hooks/useAnimatedTransition';
+import { Routes } from '../../navigation/types';
 
 const config: WithTimingConfig = {
   duration: 200,
@@ -109,7 +108,7 @@ const LoginScreen: FC = () => {
             label={'Sign up'}
             fontSize={16}
             color={Color.teal}
-            onPress={() => navigate(AuthScreens.SignupScreen)}
+            onPress={() => navigate(Routes.SignupScreen)}
           />
         </AnimatedTransition>
       </View>

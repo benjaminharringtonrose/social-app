@@ -1,23 +1,19 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 
-export enum RootScreens {
+export enum Routes {
   BottomTabNavigator = "BottomTabNavigator",
   AuthNavigator = "AuthNavigator",
-  LoadingScreen = "LoadingScreen"
-}
-
-export enum AuthScreens {
+  LoadingScreen = "LoadingScreen",
   LoginScreen = "LoginScreen",
   SignupScreen = "SignupScreen",
-}
-
-export enum BottomTabScreens {
   HomeScreen = "HomeScreen",
   MessagesScreen = "MessagesScreen",
   PostScreen = "PostScreen",
   NotificationScreen = "NotificationsScreen",
   SettingsScreen = "SettingsScreen",
 }
+
+export type ParamLists = RootStackParamList | AuthStackParamList | BottomTabParamList;
 
 export type RootStackParamList = {
   BottomTabNavigator: NavigatorScreenParams<BottomTabParamList>;

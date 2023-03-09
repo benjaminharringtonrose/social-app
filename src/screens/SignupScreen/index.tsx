@@ -7,12 +7,12 @@ import { StatusBar } from 'expo-status-bar';
 import { AuthRootView, Input, Button, PressableText, PressableSocial } from '../../components';
 import { Color } from '../../constants';
 import { AnimationType, useAnimatedTransition, useAuth } from '../../hooks';
-import { AuthScreens } from '../../navigation/types';
 import { isIOS } from '../../utils';
 
 import styles from './styles';
 import { Easing, WithTimingConfig } from 'react-native-reanimated';
 import { IUseAnimatedTransitionConfig } from '../../hooks/useAnimatedTransition';
+import { Routes } from '../../navigation/types';
 
 const timingConfig: WithTimingConfig = {
   duration: 200,
@@ -28,6 +28,7 @@ const SignupScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { onEmailPasswordSignup, loadingSignUp } = useAuth();
+
   const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition({ 
     type: AnimationType.shrinkGrow,
     config: timingConfig,
@@ -101,7 +102,7 @@ const SignupScreen: FC = () => {
             label={'Sign in'}
             color={Color.teal}
             fontSize={16}
-            onPress={() => navigate(AuthScreens.LoginScreen)}
+            onPress={() => navigate(Routes.LoginScreen)}
           />
         </AnimatedTransition>
       </View>

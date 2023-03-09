@@ -5,6 +5,7 @@ import { runOnJS, useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig
 import { AnimatedTransition } from "../components";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AnimationType } from "./types";
+import { ParamLists, Routes } from "../navigation/types";
 
 type TNavigationProp = NativeStackNavigationProp<any, any>;
 
@@ -41,11 +42,11 @@ export const useAnimatedTransition = ({ type, config }: IUseAnimatedTransitionCo
     }
   }, []));
 
-  const runNavigateOnJS = (screen: any, params?: any) => {
+  const runNavigateOnJS = (screen: Routes, params?: ParamLists) => {
     navigation.navigate(screen, params);
   };
 
-  const navigate = (screen: any, params?: any) => {
+  const navigate = (screen: Routes, params?: ParamLists) => {
     switch(type) {
       case AnimationType.shrinkGrow:
         opacity.value = withTiming(0, config);
