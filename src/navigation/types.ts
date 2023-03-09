@@ -13,8 +13,6 @@ export enum Routes {
   SettingsScreen = "SettingsScreen",
 }
 
-export type ParamLists = RootStackParamList | AuthStackParamList | BottomTabParamList;
-
 export type RootStackParamList = {
   BottomTabNavigator: NavigatorScreenParams<BottomTabParamList>;
   AuthNavigator: NavigatorScreenParams<AuthStackParamList>;

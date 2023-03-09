@@ -5,7 +5,6 @@ import { runOnJS, useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig
 import { AnimatedTransition } from "../components";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AnimationType } from "./types";
-import { ParamLists, Routes } from "../navigation/types";
 
 type TNavigationProp = NativeStackNavigationProp<any, any>;
 
@@ -28,25 +27,25 @@ export const useAnimatedTransition = ({ type, config }: IUseAnimatedTransitionCo
         opacity.value = withTiming(1, config);
         scale.value = withTiming(1, config);
         break;
-    }
-    return () => {
-      switch(type) {
-        case AnimationType.fadeInFadeOut:
-          opacity.value = withTiming(0, config);
-          break;
-        case AnimationType.shrinkGrow:
-        default:
-          return;
       }
-      
+      return () => {
+        switch(type) {
+          case AnimationType.fadeInFadeOut:
+            opacity.value = withTiming(0, config);
+            break;
+          case AnimationType.shrinkGrow:
+          default:
+            return;
+        }
+        
     }
   }, []));
 
-  const runNavigateOnJS = (screen: Routes, params?: ParamLists) => {
+  const runNavigateOnJS = (screen: string, params?: Record<string, any>) => {
     navigation.navigate(screen, params);
   };
 
-  const navigate = (screen: Routes, params?: ParamLists) => {
+  const navigate = (screen: string, params?: Record<string, any>) => {
     switch(type) {
       case AnimationType.shrinkGrow:
         opacity.value = withTiming(0, config);
