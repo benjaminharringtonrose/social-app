@@ -3,7 +3,7 @@ import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react
 
 import { LoginScreen, SignupScreen } from '../screens';
 
-import { AuthScreens, AuthStackParamList } from './types';
+import { Routes, AuthStackParamList } from './types';
 
 const navigatorScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
@@ -14,9 +14,9 @@ const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 export const AuthNavigator: FC = () => (
   <Stack.Navigator screenOptions={navigatorScreenOptions}>
-    <Stack.Screen name={AuthScreens.LoginScreen} component={LoginScreen} />
+    <Stack.Screen name={Routes.LoginScreen} component={LoginScreen} />
     <Stack.Screen 
-      name={AuthScreens.SignupScreen}
+      name={Routes.SignupScreen}
       component={SignupScreen} 
       options={{ gestureEnabled: false, }}
     />
