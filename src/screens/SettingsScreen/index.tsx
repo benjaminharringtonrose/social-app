@@ -7,7 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { BottomTabParamList } from '../../navigation/types';
 import { PressableText, RootView, SettingRow } from '../../components';
 import { Color, Font, Size } from '../../constants';
-import { useAnimatedTransition, useAuth } from '../../hooks';
+import { AnimationType, useAnimatedTransition, useAuth } from '../../hooks';
 
 import styles from './styles';
 
@@ -17,7 +17,7 @@ const SettingsScreen: FC = () => {
   const [pushEnabled, setPushEnabled] = useState(false);
 
   const { onSignout } = useAuth();
-  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ animationType: 'fadeInFadeOut' });
+  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ type: AnimationType.fadeInFadeOut });
 
   const navigation = useNavigation<TNavigationProp>();
 

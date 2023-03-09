@@ -1,3 +1,5 @@
+export type SingleOrArray<T> = T | T[];
+
 export enum AuthEnum {
   Authenticated = 'Authenticated',
   Unauthenticated = 'Unauthenticated',
@@ -10,7 +12,7 @@ export interface IContent {
   name: string;
   timestamp: string;
   caption?: string;
-  content?: string[];
+  content?: SingleOrArray<string>;
   likes?: number;
   comments?: number;
 }

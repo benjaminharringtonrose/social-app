@@ -1,23 +1,23 @@
 import React, { FC } from 'react';
-import { FlatList, ListRenderItemInfo, RefreshControl, View } from 'react-native';
+import { FlatList, ListRenderItemInfo, RefreshControl } from 'react-native';
 
 import { ContentCard, ItemSeparator, RootView } from '../../components';
 import { Mock, Color } from '../../constants';
-import { useMockRefresh, useAnimatedTransition } from '../../hooks';
+import { useMockRefresh, useAnimatedTransition, AnimationType } from '../../hooks';
 import { IContent } from '../../types';
 
 import styles from './styles';
 
 const HomeScreen: FC = () => {
   
-  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ animationType: 'fadeInFadeOut' });
-  const { onRefresh, refreshing } = useMockRefresh();
+  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ type: AnimationType.fadeInFadeOut });
+  const { onRefresh, refreshing } = useMockRefresh(5000);
 
   const renderItem = ({ item }: ListRenderItemInfo<IContent>) => (
     <ContentCard 
       id={item.id} 
       avatarUrl={item.avatarUrl} 
-      name={item.name} 
+      name={item.name}
       timestamp={item.timestamp} 
       caption={item.caption}
       content={item.content}

@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 
 import { Button, Input, AuthRootView, PressableSocial, PressableText } from '../../components';
 import { Color } from '../../constants';
-import { useAnimatedTransition, useAuth } from '../../hooks';
+import { AnimationType, useAnimatedTransition, useAuth } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
 
 import styles from './styles';
@@ -18,11 +18,6 @@ const config: WithTimingConfig = {
   easing: Easing.ease,
 };
 
-const animatedTranisitionConfig: IUseAnimatedTransitionConfig = { 
-  animationType: 'shrinkGrow', 
-  config, 
-};
-
 
 const LoginScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
@@ -30,7 +25,10 @@ const LoginScreen: FC = () => {
   const { loadingLogin, onEmailPasswordLogin } = useAuth();
 
 
-  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition(animatedTranisitionConfig);
+  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition({ 
+    type: AnimationType.shrinkGrow, 
+    config, 
+  });
 
   return (
     <AuthRootView backgroundTitle={'Social'}>

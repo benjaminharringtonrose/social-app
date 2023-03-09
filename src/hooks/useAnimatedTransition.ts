@@ -4,35 +4,36 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming, WithTimingConfig } from "react-native-reanimated"
 import { AnimatedTransition } from "../components";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AnimationType } from "./types";
 
 type TNavigationProp = NativeStackNavigationProp<any, any>;
 
 export interface IUseAnimatedTransitionConfig {
-  animationType: 'fadeInFadeOut' | 'shrinkGrow'
+  type: AnimationType;
   config?: WithTimingConfig;
 }
 
-export const useAnimatedTransition = ({ animationType, config }: IUseAnimatedTransitionConfig) => {
+export const useAnimatedTransition = ({ type, config }: IUseAnimatedTransitionConfig) => {
   const navigation = useNavigation<TNavigationProp>();
   const opacity = useSharedValue(0);
   const scale = useSharedValue(0);
 
   useFocusEffect(useCallback(() => {
-    switch(animationType) {
-      case 'fadeInFadeOut':
-        opacity.value = withTiming(1);
+    switch(type) {
+      case AnimationType.fadeInFadeOut:
+        opacity.value = withTiming(1, config);
         break;
-      case 'shrinkGrow':
+      case AnimationType.shrinkGrow:
         opacity.value = withTiming(1, config);
         scale.value = withTiming(1, config);
         break;
     }
     return () => {
-      switch(animationType) {
-        case 'fadeInFadeOut':
-          opacity.value = withTiming(0);
+      switch(type) {
+        case AnimationType.fadeInFadeOut:
+          opacity.value = withTiming(0, config);
           break;
-        case 'shrinkGrow':
+        case AnimationType.shrinkGrow:
         default:
           return;
       }
@@ -45,8 +46,8 @@ export const useAnimatedTransition = ({ animationType, config }: IUseAnimatedTra
   };
 
   const navigate = (screen: any, params?: any) => {
-    switch(animationType) {
-      case 'shrinkGrow':
+    switch(type) {
+      case AnimationType.shrinkGrow:
         opacity.value = withTiming(0, config);
         scale.value = withTiming(0, config, (finished) => {
           if (finished) {
@@ -61,12 +62,12 @@ export const useAnimatedTransition = ({ animationType, config }: IUseAnimatedTra
   };
 
   const animatedStyle = useAnimatedStyle(() => {
-    switch(animationType) {
-      case 'fadeInFadeOut':
+    switch(type) {
+      case AnimationType.fadeInFadeOut:
         return {
           opacity: opacity.value,
         };
-      case 'shrinkGrow':
+      case AnimationType.shrinkGrow:
         return {
           opacity: opacity.value,
           transform: [{ scale: scale.value }],

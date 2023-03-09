@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AuthRootView, Input, Button, PressableText, PressableSocial } from '../../components';
 import { Color } from '../../constants';
-import { useAnimatedTransition, useAuth } from '../../hooks';
+import { AnimationType, useAnimatedTransition, useAuth } from '../../hooks';
 import { AuthScreens } from '../../navigation/types';
 import { isIOS } from '../../utils';
 
@@ -14,21 +14,24 @@ import styles from './styles';
 import { Easing, WithTimingConfig } from 'react-native-reanimated';
 import { IUseAnimatedTransitionConfig } from '../../hooks/useAnimatedTransition';
 
-const config: WithTimingConfig = {
+const timingConfig: WithTimingConfig = {
   duration: 200,
   easing: Easing.ease,
 };
 
 const animatedTranisitionConfig: IUseAnimatedTransitionConfig = { 
-  animationType: 'shrinkGrow',
-  config,
+  type: AnimationType.shrinkGrow,
+  config: timingConfig,
 };
 
 const SignupScreen: FC = () => {
   const passwordInput = useRef<TextInput>(null!);
 
   const { onEmailPasswordSignup, loadingSignUp } = useAuth();
-  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition(animatedTranisitionConfig);
+  const { AnimatedTransition, navigate, animatedStyle } = useAnimatedTransition({ 
+    type: AnimationType.shrinkGrow,
+    config: timingConfig,
+  });
 
   return (
     <AuthRootView backgroundTitle={'Social'}>

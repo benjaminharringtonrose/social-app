@@ -3,12 +3,12 @@ import { FlatList, RefreshControl, ListRenderItemInfo } from 'react-native';
 
 import { MessageThreadButton, RootView } from '../../components';
 import { Color, Mock } from '../../constants';
-import { useAnimatedTransition, useMockRefresh } from '../../hooks';
+import { AnimationType, useAnimatedTransition, useMockRefresh } from '../../hooks';
 import { IContent } from '../../types';
 
 const MessagesScreen: FC = () => {
 
-  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ animationType: 'fadeInFadeOut' });
+  const { AnimatedTransition, animatedStyle } = useAnimatedTransition({ type: AnimationType.fadeInFadeOut });
   const { onRefresh, refreshing } = useMockRefresh();
 
   const renderItem = ({ item }: ListRenderItemInfo<IContent>) => (
