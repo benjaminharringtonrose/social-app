@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Image, View, Text, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -8,20 +8,12 @@ import styles from './styles';
 import { IContent } from '../../types';
 import Avatar from '../Avatar';
 
-const ContentCard: FC<IContent> = ({
-  avatarUrl,
-  name,
-  timestamp,
-  caption,
-  content,
-  likes,
-  comments
-}) => {
+const ContentCard: FC<IContent> = ({ avatarUrl, name, timestamp, caption, content, likes, comments }) => {
   return (
     <View style={styles.rootContainer}>
       {/* TOP ROW */}
       <View style={styles.topRowContainer}>
-        <Avatar source={{ uri: avatarUrl }}  />
+        <Avatar source={{ uri: avatarUrl }} />
         <View style={styles.topRowTextContainer}>
           <Text style={styles.text}>{name}</Text>
           <Text style={styles.text}>{timestamp}</Text>
@@ -47,7 +39,7 @@ const ContentCard: FC<IContent> = ({
         <Text style={[styles.text, { marginLeft: Size.gutter }]}>{comments}</Text>
       </View>
     </View>
-  )
+  );
 };
 
-export default ContentCard;
+export default memo(ContentCard);
